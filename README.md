@@ -1,58 +1,165 @@
-# OMNITRACE
+<div align="center">
+  <img src="docs/assets/omnitrace-preview.svg" alt="OMNITRACE dark intelligence workspace preview" width="100%" />
+  <br />
+  <h1>OMNITRACE</h1>
+  <p><strong>Open-Source Intelligence & Cyber Investigation Workspace</strong></p>
+  <p>Follow public signals. Organize leads. Preserve context. Keep conclusions evidence-led.</p>
+  <p>
+    <a href="https://github.com/raxwqx/OMNITRACE"><img src="https://img.shields.io/badge/version-0.5.1-9cffb5?style=for-the-badge&labelColor=101713" alt="Version 0.5.1" /></a>
+    <img src="https://img.shields.io/badge/Python-3.11%2B-9bdcff?style=for-the-badge&logo=python&logoColor=white&labelColor=101713" alt="Python 3.11 or newer" />
+    <img src="https://img.shields.io/badge/FastAPI-API-9cffb5?style=for-the-badge&logo=fastapi&logoColor=white&labelColor=101713" alt="FastAPI" />
+    <img src="https://img.shields.io/badge/UI-Turkish%20%2F%20English-c5a6ff?style=for-the-badge&labelColor=101713" alt="Turkish and English UI" />
+    <img src="https://img.shields.io/badge/License-MIT-f3d58a?style=for-the-badge&labelColor=101713" alt="MIT License" />
+  </p>
+  <p>
+    <a href="#-features">Features</a> ·
+    <a href="#-quick-start">Quick start</a> ·
+    <a href="#-screens-and-modules">Modules</a> ·
+    <a href="#-api-examples">API examples</a> ·
+    <a href="#-security-and-responsible-use">Responsible use</a>
+  </p>
+</div>
 
-**Public-source OSINT & Cyber Intelligence Workspace**  
-Version: `0.5.1` · Python 3.11+ · FastAPI
+> **Preview note:** The image above is an illustrative interface preview based on the current OMNITRACE layout, not a live screenshot. The app runs locally in your browser.
 
-OMNITRACE is a modular starter for authorized, public-source research. It provides a dark web dashboard, username-to-public-profile candidate discovery, bilingual identity research, persistent search history, exportable results, an investigation notebook, and passive indicator triage tools backed by SQLAlchemy. SQLite is supported for local development; PostgreSQL is the recommended Pro deployment database.
+OMNITRACE is a modular starter workspace for **authorized, public-source OSINT research**. It brings identity leads, IP and domain context, indicator triage, analyst utilities, and investigation notes into one bilingual interface. The goal is not to magically identify people; it is to help analysts structure leads, record context, and keep uncertainty visible.
 
-> **Important:** profile URLs are *candidates*, not verified accounts. A matching username does not prove that accounts belong to the same person. This starter does not log in to social networks, bypass access controls, scrape private content, or claim that a profile exists.
+**Current release:** `v0.5.1` · **Platform:** local-first web application · **Backend:** FastAPI · **Database:** SQLite by default, PostgreSQL supported
 
-## Current features
+---
 
-- Responsive Matrix-inspired black/acid-green dashboard with a one-time, skippable startup intro on first visit after this release.
-- Username input validation and candidate URL generation from a fixed provider registry.
-- Clear `not_checked` status for each candidate; no false existence claims.
-- Platform categories and recent identity-search history.
-- Export identity results as JSON or CSV, or copy candidate URLs.
-- Turkish and English interface with remembered language preference.
-- SQLAlchemy persistence with SQLite for local development and PostgreSQL for Docker deployments.
-- Health endpoint and automated tests.
-- **IP Intelligence:** validates IPv4/IPv6 and labels global/private/loopback/reserved properties; links to public RDAP records.
-- **Domain & DNS:** bounded A, AAAA, MX, NS and TXT DNS lookups, plus RDAP and certificate-transparency search links.
-- **Email domain check:** validates syntax and checks public MX records without claiming mailbox existence.
-- **URL inspector:** parses HTTP(S) URL structure locally and highlights basic indicators; never fetches the submitted URL.
-- **Hash identifier:** recognizes common hexadecimal digest lengths and provides optional external reputation lookup links.
-- **Bulk IOC triage:** locally classifies and deduplicates up to 100 IPs, domains, URLs, email addresses and common hashes.
-- **Passive subdomain discovery:** finds names from public Certificate Transparency records without probing hosts.
-- **Investigation notebook:** save scope and notes in the configured database, with recent identity-search history.
-- **Analyst Lab (10 browser-local utilities):** extract likely IOCs from text; defang/refang indicators; Base64 encode/decode; URL-component encode/decode; SHA-256 text digest; Unix timestamp conversion; IPv4 CIDR calculator; source-quality checklist; relationship mapper; timestamped quick-report builder.
-- **Workspace personalization:** Matrix green, cyber blue, signal purple or amber accent; compact layout; reduced-motion preference. Saved in the current browser.
-- All major screens are available in Turkish and English.
-- Docker packaging, PostgreSQL health checks, non-root container user, and loopback-only default port mapping.
+## 🧭 Contents
 
-## Stack
+- [Why OMNITRACE?](#-why-omnitrace)
+- [Features](#-features)
+- [Screens and modules](#-screens-and-modules)
+- [Architecture](#-architecture-at-a-glance)
+- [Quick start](#-quick-start)
+- [Docker and PostgreSQL](#-docker-and-postgresql)
+- [API examples](#-api-examples)
+- [Testing](#-testing)
+- [Project structure](#-project-structure)
+- [Security and responsible use](#-security-and-responsible-use)
+- [Roadmap](#-roadmap)
+- [Contributing](#-contributing)
+- [License](#-license)
 
-- FastAPI / Uvicorn
-- SQLAlchemy (SQLite for local use, PostgreSQL for Pro deployment)
-- HTML, CSS and vanilla JavaScript
-- pytest + FastAPI TestClient
+## 🧩 Why OMNITRACE?
 
-## Run locally on Kali Linux
+OSINT work can get scattered across browser tabs, terminal commands, text files, and case notes. OMNITRACE gives those small tasks a shared workspace with a consistent workflow:
 
-The release ZIP extracts into one `OMNITRACE/` folder so files do not scatter through Downloads. Open a terminal in that folder and run:
+1. **Collect a lead** from a public source or a user-provided indicator.
+2. **Inspect the context** with focused parsing and lookup helpers.
+3. **Record scope and notes** in an investigation notebook.
+4. **Export or reuse results** in JSON, CSV, or quick reports.
+5. **Keep uncertainty explicit.** A candidate is a lead, not a verified conclusion.
+
+### Design principles
+
+- **Passive-first:** no port scanning, exploitation, or arbitrary URL fetching.
+- **Evidence-aware:** distinguish a candidate, a parsed value, and a verified fact.
+- **Local-first:** the interface and analyst utilities are designed for local use.
+- **Bilingual:** Turkish and English interface labels.
+- **Modular:** a foundation for carefully scoped provider adapters and future case workflows.
+
+## ✨ Features
+
+| Module | What it does | Important boundary |
+|---|---|---|
+| **Identity Intelligence** | Generates candidate public-profile URLs from a fixed provider registry; supports platform selection and recent search history. | URLs are not automatically checked. Username similarity does not establish identity. |
+| **IP Intelligence** | Validates IPv4/IPv6 and classifies global, private, loopback, and reserved ranges; links to public RDAP records. | No guaranteed geolocation, ownership, reputation, or safety verdict. |
+| **Domain & DNS** | Bounded A, AAAA, MX, NS, and TXT lookups, with RDAP and Certificate Transparency search links. | DNS needs network access and may time out or return no records. |
+| **Passive subdomain discovery** | Uses public Certificate Transparency records to discover certificate-listed names. | Does not probe discovered hosts. Public records may be incomplete or stale. |
+| **Email domain check** | Validates email syntax and checks whether the domain publishes public MX records. | Does not verify a mailbox or prove that a person controls it. |
+| **URL inspector** | Parses HTTP(S) URL components locally and highlights basic indicators. | The submitted URL is not fetched by this tool. |
+| **Hash identifier** | Recognizes common hexadecimal digest lengths and offers optional external lookup links. | Length-based algorithm identification can be ambiguous; reputation is not queried automatically. |
+| **Bulk IOC triage** | Classifies and deduplicates up to 100 IPs, domains, URLs, email addresses, and common hashes. | Classification is a helper, not a threat verdict. |
+| **Investigation notebook** | Stores investigation titles, scope, and notes in the configured database. | Current starter is not a multi-user case-management service. |
+| **Analyst Lab** | Ten browser-local utilities for preparing and organizing data. | Outputs still need analyst review and corroboration. |
+| **Workspace settings** | Matrix green, cyber blue, signal purple, or amber accents; compact layout and motion preference. | Preferences are stored in the current browser. |
+| **Exports** | Identity results as JSON/CSV, copied candidate URLs, and timestamped quick reports. | Exported leads retain their unverified status. |
+
+### Analyst Lab: 10 local-first utilities
+
+<details>
+<summary><strong>Open the utility list</strong></summary>
+
+1. IOC extractor for likely IPs, domains, URLs, emails, and hashes in pasted text.
+2. Defang/refang helper for safely sharing indicators.
+3. Base64 text encode/decode with UTF-8 support.
+4. URL-component encode/decode.
+5. SHA-256 digest of text (not a file hash tool).
+6. Unix timestamp converter for seconds or milliseconds.
+7. IPv4 CIDR calculator for network, broadcast, and usable-host count.
+8. Source-quality checklist.
+9. Simple relationship mapper for recording leads.
+10. Timestamped quick-report builder.
+
+</details>
+
+## 🖥️ Screens and modules
+
+The interface uses a dark, Matrix-inspired theme with acid-green accents. The startup sequence plays on each fresh page load and can be skipped.
+
+| Screen | Purpose |
+|---|---|
+| **Overview** | High-level workspace snapshot and module entry points. |
+| **Identity Intelligence** | Build candidate profile links across supported platforms and export the result list. |
+| **OSINT Toolkit** | Inspect IPs, domains, email domains, URLs, hashes, and bulk indicators. |
+| **Investigations** | Keep case scope and research notes together. |
+| **Analyst Lab** | Run ten small local-first data preparation utilities in the browser. |
+| **Settings** | Switch language and adjust visual preferences. |
+
+## 🏗️ Architecture at a glance
+
+```mermaid
+flowchart TD
+    A[Browser UI<br/>HTML · CSS · JavaScript] --> B[FastAPI application]
+    B --> C[Identity API]
+    B --> D[Intelligence API]
+    B --> E[Investigation API]
+    C --> F[Provider registry<br/>candidate URLs]
+    D --> G[IP parsing · DNS · RDAP links<br/>CT search · IOC triage]
+    E --> H[SQLAlchemy persistence]
+    H --> I[(SQLite local default)]
+    H --> J[(PostgreSQL optional)]
+    A --> K[Analyst Lab<br/>browser-local utilities]
+```
+
+### Technology stack
+
+- **Backend:** Python 3.11+, FastAPI, Uvicorn
+- **Data layer:** SQLAlchemy; SQLite for local development; PostgreSQL support for Docker deployments
+- **Frontend:** HTML, CSS, vanilla JavaScript
+- **Testing:** pytest and FastAPI `TestClient`
+- **Packaging:** shell launch/test scripts, Dockerfile, Docker Compose
+
+## 🚀 Quick start
+
+### Option A: launch script (recommended)
+
+On Kali Linux or another Linux distribution with Python 3.11+, extract the release archive, open a terminal in the `OMNITRACE/` folder, and run:
 
 ```bash
 chmod +x ./run.sh ./test.sh
 ./run.sh
 ```
 
-The launcher creates a project-local virtual environment, installs the app dependencies if needed, then starts the server on `127.0.0.1:8000`. Open `http://127.0.0.1:8000`. API documentation is at `http://127.0.0.1:8000/docs`. Keep the terminal open while using the app and stop the server with `Ctrl+C`.
+Then open:
 
-Manual setup is also supported:
+- **Web app:** <http://127.0.0.1:8000>
+- **Interactive API docs:** <http://127.0.0.1:8000/docs>
+- **Health endpoint:** <http://127.0.0.1:8000/api/health>
+
+The launcher creates a project-local virtual environment, installs the app dependencies if needed, and starts the local server. Keep the terminal open while using OMNITRACE. Press `Ctrl+C` to stop it.
+
+### Option B: manual installation
 
 ```bash
 sudo apt update
 sudo apt install -y python3 python3-venv python3-pip
+
+cd OMNITRACE
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
@@ -60,62 +167,107 @@ python -m pip install -e '.[test]'
 uvicorn backend.app.main:app --reload --host 127.0.0.1 --port 8000
 ```
 
-Open `http://127.0.0.1:8000`. Interactive API documentation is at `http://127.0.0.1:8000/docs`.
-
-If editable installation fails due to a local packaging policy, use `pip install -r requirements.txt` and `pip install pytest pytest-cov httpx`, then run the same `uvicorn` command.
-
-## Run tests
+If editable installation is blocked by a local packaging policy, install dependencies directly:
 
 ```bash
-./test.sh
+python -m pip install -r requirements.txt
+python -m pip install pytest pytest-cov httpx
+uvicorn backend.app.main:app --reload --host 127.0.0.1 --port 8000
 ```
 
-Or, with the virtual environment activated, run `python -m pytest -q`. The suite uses a temporary SQLite database and does not require live OSINT-provider access; external RDAP and certificate-transparency responses are mocked. JavaScript syntax checks run when Node.js is installed.
+### First-run notes
 
-## Run with Docker (PostgreSQL)
+- Keep the app bound to `127.0.0.1` unless you understand the exposure implications.
+- The default local database is SQLite.
+- DNS lookups and public record queries require network access.
+- The app does not need external OSINT API keys for its current core workflows.
+- Do not enter passwords, secrets, or private personal records into research forms.
+
+## 🐳 Docker and PostgreSQL
+
+Docker Compose runs OMNITRACE alongside PostgreSQL and waits for the database health check before starting the app.
 
 ```bash
-# Optional: set a unique local database password first
+# Set a unique local password for this development environment.
 export POSTGRES_PASSWORD='replace-with-a-long-local-password'
 docker compose up --build
 ```
 
-Open `http://127.0.0.1:8000`. Docker Compose starts PostgreSQL and waits for its health check before starting OMNITRACE. The application port is bound to `127.0.0.1` on purpose. This is a local deployment setup, not a hardened public production deployment.
+Open <http://127.0.0.1:8000>. The default port binding is loopback-only by design; this is a local deployment configuration, **not** a hardened public production setup.
 
-For local development without Docker, unset `DATABASE_URL` and OMNITRACE uses SQLite by default. For PostgreSQL outside Compose, set `DATABASE_URL` to a SQLAlchemy URL such as `postgresql+psycopg://user:password@host:5432/omnitrace` and install dependencies with `pip install -e ".[test,postgres]"`.
-
-## OSINT toolkit API examples
+To stop the services:
 
 ```bash
-# IP metadata and RDAP link
+docker compose down
+```
+
+To remove the local database volume as well, use `docker compose down -v` only if you intentionally want to delete its stored data.
+
+For PostgreSQL outside Compose, configure `DATABASE_URL` with a SQLAlchemy URL such as:
+
+```text
+postgresql+psycopg://user:password@host:5432/omnitrace
+```
+
+Install the optional PostgreSQL dependencies with `python -m pip install -e '.[test,postgres]'`. Keep credentials in environment variables or a local `.env` file that is never committed.
+
+## 🔌 API examples
+
+Start OMNITRACE first. The examples below use the local API at `127.0.0.1:8000`.
+
+### Health check
+
+```bash
+curl http://127.0.0.1:8000/api/health
+```
+
+### Identity candidate search
+
+```bash
+curl -X POST http://127.0.0.1:8000/api/identity/search \
+  -H 'Content-Type: application/json' \
+  -d '{"username":"example_user","platforms":["github","reddit","instagram"]}'
+```
+
+The result is a list of candidate URLs. It is not a check that those accounts exist.
+
+### IP intelligence
+
+```bash
 curl -X POST http://127.0.0.1:8000/api/intel/ip \
-  -H 'Content-Type: application/json' -d '{"value":"8.8.8.8"}'
+  -H 'Content-Type: application/json' \
+  -d '{"value":"8.8.8.8"}'
+```
 
-# Public DNS records (A, AAAA, MX, NS, TXT)
+### Domain and DNS records
+
+```bash
 curl -X POST http://127.0.0.1:8000/api/intel/domain \
-  -H 'Content-Type: application/json' -d '{"value":"example.org"}'
+  -H 'Content-Type: application/json' \
+  -d '{"value":"example.org"}'
+```
 
-# URL is parsed locally, not requested
+### Parse a URL locally
+
+```bash
 curl -X POST http://127.0.0.1:8000/api/intel/url \
-  -H 'Content-Type: application/json' -d '{"value":"https://example.org/path?q=1"}'
+  -H 'Content-Type: application/json' \
+  -d '{"value":"https://example.org/path?q=1"}'
+```
 
-# Bulk local indicator classification
+The URL parser inspects the supplied string. It does not request the destination URL.
+
+### Batch indicator triage
+
+```bash
 curl -X POST http://127.0.0.1:8000/api/intel/batch \
   -H 'Content-Type: application/json' \
   -d '{"indicators":["8.8.8.8","example.org","https://example.org","d41d8cd98f00b204e9800998ecf8427e"]}'
 ```
 
-DNS queries require network access and may return no records or timeout. IP and URL parsing do not imply geolocation, ownership, safety, or reputation. Hash algorithms are inferred from length and may be ambiguous. External lookup links are optional and are not queried automatically.
-
-## API quickstart
+### Create and list investigation notes
 
 ```bash
-curl http://127.0.0.1:8000/api/health
-
-curl -X POST http://127.0.0.1:8000/api/identity/search \
-  -H 'Content-Type: application/json' \
-  -d '{"username":"example_user","platforms":["github","reddit","instagram"]}'
-
 curl -X POST http://127.0.0.1:8000/api/cases \
   -H 'Content-Type: application/json' \
   -d '{"title":"Authorized OSINT exercise","notes":"Scope and authorization recorded."}'
@@ -123,47 +275,105 @@ curl -X POST http://127.0.0.1:8000/api/cases \
 curl http://127.0.0.1:8000/api/cases
 ```
 
-## Project layout
+For the full interactive schema, visit <http://127.0.0.1:8000/docs>.
 
-```text
-backend/app/
-  api/identity.py       Identity search endpoint
-  api/cases.py          Case notebook endpoints
-  api/intel.py          IP, DNS/domain, email, URL, hash and bulk IOC tools
-  core/config.py        Environment configuration
-  models/schemas.py     Request/response validation
-  services/identity/    Provider registry and candidate builder
-  services/cases.py     SQLAlchemy case persistence
-  services/identity/history.py  Search history persistence
-  db.py                 SQLAlchemy engine and sessions
-  main.py               FastAPI app and static frontend
-backend/tests/          Automated tests
-frontend/               Static UI assets
+## 🧪 Testing
+
+Run the bundled test script:
+
+```bash
+./test.sh
 ```
 
-## Security and deployment notes
+Or activate the virtual environment and run:
 
-This is a working **starter**, not yet a hardened multi-user public service. Before exposing it to the internet:
+```bash
+python -m pytest -q
+```
 
-1. Add authentication, authorization, CSRF protection where applicable, and per-user case isolation.
-2. Put it behind HTTPS and a reverse proxy; configure trusted hosts and strict CORS.
-3. Add rate limits, audit logging, backup/restore, retention controls, and secret management.
-4. Keep provider integrations on an allowlist. Do not accept arbitrary fetch URLs from users; that can create SSRF risk.
-5. Follow each provider's terms, robots policies, API access rules, and applicable law.
-6. Add API adapters one by one and record provenance, retrieval time, and confidence. Never treat username similarity as identity proof.
+The test suite uses a temporary SQLite database and mocks external RDAP/Certificate Transparency responses where appropriate. It does not require live OSINT provider access. JavaScript syntax checks are also run when Node.js is available.
 
-## Roadmap
+## 📁 Project structure
 
-- `v0.5`: opt-in threat-intelligence API connectors with explicit keys, provenance, rate-limit handling, and the planned provider adapter interface.
-- `v0.6`: database migrations, authentication and user-scoped investigations remain planned.
-- `v0.6`: evidence graph, timeline, and richer HTML/JSON reports.
-- `v1.0`: deployment hardening, migrations, integration tests, and documented operational controls.
+```text
+OMNITRACE/
+├── backend/
+│   ├── app/
+│   │   ├── api/
+│   │   │   ├── identity.py       # Identity candidate search API
+│   │   │   ├── cases.py          # Investigation notebook API
+│   │   │   └── intel.py          # IP, DNS, email, URL, hash, bulk IOC
+│   │   ├── core/                 # App configuration
+│   │   ├── models/               # Request and response schemas
+│   │   ├── services/             # Identity and case services
+│   │   ├── db.py                 # SQLAlchemy engine and sessions
+│   │   └── main.py               # FastAPI app and static frontend
+│   └── tests/                    # API and service tests
+├── frontend/
+│   ├── index.html                # App shell and views
+│   ├── styles.css                # Dark Matrix-inspired theme
+│   └── app.js                    # Navigation and browser-side tools
+├── docs/assets/
+│   └── omnitrace-preview.svg     # README interface illustration
+├── Dockerfile
+├── docker-compose.yml
+├── pyproject.toml
+├── requirements.txt
+├── run.sh                        # Local launcher
+├── test.sh                       # Test runner
+├── CHANGELOG.md
+└── LICENSE
+```
 
-## License
+## 🛡️ Security and responsible use
 
-MIT. See `LICENSE`.
+OMNITRACE is a research starter, **not yet a hardened multi-user public service**. Before exposing any deployment to the internet, address at least the following:
 
+- Add authentication, authorization, and per-user case isolation.
+- Review CSRF protections, trusted-host handling, CORS, and HTTPS termination.
+- Add rate limits, audit logs, backup/restore, data-retention controls, and secret management.
+- Keep integrations allowlisted. Never turn user input into arbitrary server-side fetches; that can create SSRF risk.
+- Follow source-provider terms, API rules, privacy requirements, and applicable law.
+- Record provenance, retrieval time, scope, and confidence for future enrichment adapters.
+- Do not treat username similarity, an IP address, or a single public record as proof of identity or intent.
 
-## Interface languages
+### Data interpretation rules
 
-The interface supports Turkish and English. Use the **TR / EN** control in the top bar to switch languages; your choice is remembered in the browser.
+- **Candidate ≠ confirmed account.** A generated profile URL may not exist.
+- **Public ≠ accurate.** Public records can be stale, incomplete, or misleading.
+- **Parsed ≠ safe.** A syntactically valid indicator has no automatic safety verdict.
+- **Correlation ≠ identity.** Similar usernames or shared infrastructure are not proof that two entities are the same person.
+- **Analyst tools ≠ source of truth.** Review and corroborate outputs before making decisions.
+
+## 🗺️ Roadmap
+
+Planned work, subject to design and testing:
+
+- **v0.6:** database migrations, authentication, and user-scoped investigations.
+- **v0.6+:** evidence graph, timeline, and richer HTML/JSON reports.
+- **Future adapters:** opt-in threat-intelligence integrations with explicit API keys, source provenance, and rate-limit handling.
+- **v1.0:** deployment hardening, integration tests, and operational documentation.
+
+Roadmap items are plans, not features promised in the current release.
+
+## 🤝 Contributing
+
+Issues, careful bug reports, documentation improvements, and scoped pull requests are welcome.
+
+1. Open an issue describing the problem or proposed change.
+2. Keep changes focused and document any new data collection or network behavior.
+3. Add or update tests for behavior changes.
+4. Run `./test.sh` before submitting a pull request.
+5. Never include API keys, personal data, investigation records, or real-world sensitive indicators in test fixtures.
+
+## 📜 License
+
+Released under the [MIT License](LICENSE).
+
+---
+
+<div align="center">
+  <strong>OMNITRACE</strong><br />
+  <sub>Built for responsible public-source research · v0.5.1</sub><br />
+  <sub>TR / EN · Local-first · Evidence-aware</sub>
+</div>
