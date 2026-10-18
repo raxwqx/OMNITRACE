@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+.env
+*.db
+*.db-shm
+*.db-wal
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+.DS_Store

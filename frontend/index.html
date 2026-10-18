@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0e14">
+  <meta name="description" content="OMNITRACE public-source OSINT investigation workspace">
+  <title>OMNITRACE | Intelligence Workspace</title>
+  <link rel="stylesheet" href="/static/styles.css?v=0.5.1">
+</head>
+<body>
+  <section id="system-intro" class="system-intro" aria-label="OMNITRACE system startup" aria-live="polite">
+    <canvas id="matrix-canvas" class="matrix-canvas" aria-hidden="true"></canvas>
+    <div class="intro-vignette" aria-hidden="true"></div>
+    <div class="intro-content">
+      <div class="intro-kicker"><span class="intro-led"></span><span data-intro="classification">SECURE WORKSPACE / INITIALIZING</span></div>
+      <div class="intro-logo">OMNI<span>TRACE</span><i>_</i></div>
+      <div class="intro-subtitle" data-intro="subtitle">OPEN-SOURCE INTELLIGENCE PLATFORM</div>
+      <div class="terminal-window">
+        <div class="terminal-bar"><span></span><span></span><span></span><b>omnitrace://boot</b></div>
+        <div id="intro-terminal" class="terminal-body" aria-label="System startup log"></div>
+        <div class="terminal-progress"><span id="intro-progress"></span></div>
+      </div>
+      <button id="intro-skip" class="intro-skip" type="button" data-intro="skip">SKIP INITIALIZATION ↗</button>
+    </div>
+  </section>
+  <div class="shell">
+    <aside class="sidebar">
+      <a class="brand" href="/" aria-label="OMNITRACE home">
+        <span class="brand-mark">O<span>+</span></span>
+        <span><strong>OMNITRACE</strong><small data-i18n="brandSubtitle">INTELLIGENCE WORKSPACE</small></span>
+      </a>
+      <div class="nav-label" data-i18n="workspace">WORKSPACE</div>
+      <button class="nav-item active" data-view="overview"><span>◈</span> <span data-i18n="overview">Overview</span></button>
+      <button class="nav-item" data-view="identity"><span>◎</span> <span data-i18n="identity">Identity Intelligence</span></button>
+      <button class="nav-item" data-view="intel"><span>⌘</span> <span data-i18n="osintTools">OSINT Toolkit</span></button>
+      <button class="nav-item" data-view="cases"><span>▤</span> <span data-i18n="investigations">Investigations</span></button>
+      <button class="nav-item" data-view="lab"><span>⌬</span> <span data-i18n="analystLab">Analyst Lab</span></button>
+      <button class="nav-item" data-view="settings"><span>⚙</span> <span data-i18n="settings">Settings</span></button>
+      <div class="sidebar-bottom">
+        <div class="status-dot"></div>
+        <div><strong data-i18n="coreSystems">Core systems</strong><small id="system-status" data-i18n="checkingStatus">Checking status…</small></div>
+        <span class="pulse"></span>
+      </div>
+      <div class="sidebar-foot">OMNITRACE <span>v0.5.1</span><br><small data-i18n="publicResearchOnly">PUBLIC-SOURCE RESEARCH ONLY</small></div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div><span class="eyebrow" data-i18n="topEyebrow">CYBER INTELLIGENCE / WORKSPACE</span><h1 id="page-title" data-i18n="overview">Overview</h1></div>
+        <div class="top-actions"><button id="language-toggle" class="language-toggle" type="button" aria-label="Switch language">TR</button><span class="live-pill"><i></i> <span data-i18n="localInstance">LOCAL INSTANCE</span></span><div class="avatar">ST</div></div>
+      </header>
+
+      <section id="view-overview" class="view">
+        <div class="hero">
+          <div class="hero-copy"><div class="eyebrow accent" data-i18n="openSourceIntel">OPEN-SOURCE INTELLIGENCE</div>
+            <h2><span data-i18n="heroLine1">See the signals.</span><br><span data-i18n="heroLine2">Connect the context.</span></h2>
+            <p data-i18n="heroDescription">A focused workspace for public-source research, identity leads and investigation notes.</p>
+            <button class="primary" data-goto="identity"><span data-i18n="startSearch">Start an identity search</span> <span>↗</span></button>
+          </div>
+          <div class="orb-wrap" aria-hidden="true"><div class="orb"><div class="orb-core">OT</div><span class="orbit o1"></span><span class="orbit o2"></span><i class="node n1"></i><i class="node n2"></i><i class="node n3"></i></div><div class="orb-caption" data-i18n="signalSourceContext">SIGNAL / SOURCE / CONTEXT</div></div>
+        </div>
+        <div class="section-head"><div><div class="eyebrow" data-i18n="workspaceSnapshot">WORKSPACE SNAPSHOT</div><h3 data-i18n="operationalOverview">Operational overview</h3></div><span class="subtle" data-i18n="liveLocalData">Live local data</span></div>
+        <div class="stat-grid">
+          <article class="stat-card"><div class="stat-top"><span data-i18n="platformCatalog">PLATFORM CATALOG</span><span class="stat-icon">◎</span></div><strong id="platform-count">21</strong><p data-i18n="candidateSources">Candidate profile sources</p></article>
+          <article class="stat-card"><div class="stat-top"><span data-i18n="investigationCases">INVESTIGATION CASES</span><span class="stat-icon">▤</span></div><strong id="case-count">0</strong><p data-i18n="savedLocalDatabase">Saved in local database</p></article>
+          <article class="stat-card"><div class="stat-top"><span data-i18n="verifiedIdentities">VERIFIED IDENTITIES</span><span class="stat-icon">◇</span></div><strong>0</strong><p data-i18n="noIdentityClaims">No identity claims are inferred</p></article>
+        </div>
+        <div class="section-head"><div><div class="eyebrow" data-i18n="availableModules">AVAILABLE MODULES</div><h3 data-i18n="researchTools">Research tools</h3></div></div>
+        <div class="module-grid">
+          <button class="module-card" data-goto="identity"><span class="module-symbol">◎</span><strong data-i18n="identity">Identity Intelligence</strong><p data-i18n="identityModuleDescription">Generate candidate public profile links across supported platforms.</p><span class="module-link" data-i18n="openModule">Open module ↗</span></button>
+          <button class="module-card" data-goto="cases"><span class="module-symbol">▤</span><strong data-i18n="caseNotebook">Investigation notebook</strong><p data-i18n="caseModuleDescription">Create cases and keep scope and research notes together.</p><span class="module-link" data-i18n="openModule">Open module ↗</span></button>
+          <button class="module-card" data-goto="intel"><span class="module-symbol">⌘</span><strong data-i18n="osintTools">OSINT Toolkit</strong><p data-i18n="osintToolsDescription">Inspect IPs, domains, email syntax, URLs, hashes and bulk indicators.</p><span class="module-link" data-i18n="openModule">Open module ↗</span></button>
+          <article class="module-card future"><span class="module-symbol">⌁</span><strong data-i18n="threatIntel">Threat intelligence</strong><p data-i18n="threatModuleDescription">IOC enrichment connectors are planned for a future release.</p><span class="soon" data-i18n="roadmap">ROADMAP</span></article>
+        </div>
+      </section>
+
+      <section id="view-identity" class="view hidden">
+        <div class="page-intro"><div class="eyebrow accent" data-i18n="identityEyebrow">IDENTITY INTELLIGENCE / 01</div><h2 data-i18n="publicProfileDiscovery">Public profile discovery</h2><p data-i18n="identityIntro">Generate a structured list of possible profile URLs. Results are leads, not proof of identity or account existence.</p></div>
+        <form id="identity-form" class="panel search-panel">
+          <label for="username"><span data-i18n="usernameLabel">Username</span> <span data-i18n="noPrivateInfo">Do not enter passwords or private information</span></label>
+          <div class="search-row"><div class="input-wrap"><span>@</span><input id="username" name="username" placeholder="example_user" data-i18n-placeholder="usernamePlaceholder" maxlength="64" required pattern="[A-Za-z0-9._@-]+" autocomplete="off"></div><button class="primary" type="submit" id="search-button"><span data-i18n="generateLeads">Generate leads</span> <span>↗</span></button></div>
+          <div class="form-note" data-i18n="usernameAllowed">Allowed: letters, numbers, dots, underscores and hyphens.</div>
+          <div class="platform-tools"><strong data-i18n="platformCoverage">Platform coverage</strong><button type="button" id="select-all" class="text-button" data-i18n="selectAll">Select all</button><button type="button" id="clear-all" class="text-button" data-i18n="clear">Clear</button></div>
+          <div id="platform-options" class="platform-options"><span class="muted" data-i18n="loadingPlatforms">Loading platform catalog…</span></div>
+        </form>
+        <div id="identity-message" class="notice hidden" role="status"></div>
+        <div id="identity-results" class="panel results-panel hidden">
+          <div class="results-header"><div><div class="eyebrow" data-i18n="researchOutput">RESEARCH OUTPUT</div><h3 data-i18n="candidateProfiles">Candidate profiles</h3></div><span id="result-count" class="count-pill">0 results</span></div>
+          <div class="warning-note" data-i18n="identityWarning">ⓘ Links have not been checked. An identical username on two services does not establish that the accounts belong to the same person.</div>
+          <div class="results-actions"><button type="button" class="text-button" id="export-json" data-i18n="exportJson">Export JSON ↓</button><button type="button" class="text-button" id="export-csv" data-i18n="exportCsv">Export CSV ↓</button><button type="button" class="text-button" id="copy-results" data-i18n="copyLinks">Copy links</button></div>
+          <div id="results-list" class="results-list"></div>
+        </div>
+        <div class="section-head"><div><div class="eyebrow" data-i18n="recentActivity">RECENT ACTIVITY</div><h3 data-i18n="recentIdentitySearches">Recent identity searches</h3></div><button class="text-button" id="refresh-identity-history"><span data-i18n="refresh">Refresh</span> ↻</button></div>
+        <div id="identity-history" class="case-list"><div class="empty-state" data-i18n="loadingHistory">Loading search history…</div></div>
+      </section>
+
+      <section id="view-intel" class="view hidden">
+        <div class="page-intro"><div class="eyebrow accent" data-i18n="intelEyebrow">OSINT TOOLKIT / 02</div><h2 data-i18n="osintTools">OSINT Toolkit</h2><p data-i18n="intelIntro">Passive utilities for public indicators. Network lookups are bounded; URLs are never fetched by the URL analyzer.</p></div>
+        <div class="intel-grid">
+          <form class="panel intel-card" data-intel-form data-endpoint="ip"><h3 data-i18n="ipIntel">IP Intelligence</h3><p data-i18n="ipDesc">Classify IPv4/IPv6 and open its public RDAP record.</p><label for="intel-ip" data-i18n="ipAddress">IP address</label><input id="intel-ip" name="value" placeholder="203.0.113.10" required maxlength="64"><button class="primary" type="submit" data-i18n="analyze">Analyze</button></form>
+          <form class="panel intel-card" data-intel-form data-endpoint="domain"><h3 data-i18n="domainIntel">Domain & DNS</h3><p data-i18n="domainDesc">Query public A, AAAA, MX, NS and TXT records.</p><label for="intel-domain" data-i18n="domainName">Domain name</label><input id="intel-domain" name="value" placeholder="example.org" required maxlength="253"><button class="primary" type="submit" data-i18n="lookup">Look up</button></form>
+          <form class="panel intel-card" data-intel-form data-endpoint="ip-rdap"><h3 data-i18n="ipRdapTitle">IP Network Registry</h3><p data-i18n="ipRdapDesc">Retrieve public RDAP allocation and registry metadata for a global IP.</p><label for="intel-ip-rdap" data-i18n="ipAddress">IP address</label><input id="intel-ip-rdap" name="value" placeholder="8.8.8.8" required maxlength="64"><button class="primary" type="submit" data-i18n="enrich">Enrich</button></form>
+          <form class="panel intel-card" data-intel-form data-endpoint="subdomains"><h3 data-i18n="subdomainTitle">Passive Subdomain Discovery</h3><p data-i18n="subdomainDesc">Collect names from public certificate-transparency records without probing hosts.</p><label for="intel-subdomain" data-i18n="domainName">Domain name</label><input id="intel-subdomain" name="value" placeholder="example.org" required maxlength="253"><button class="primary" type="submit" data-i18n="discover">Discover</button></form>
+          <form class="panel intel-card" data-intel-form data-endpoint="email"><h3 data-i18n="emailIntel">Email Domain Check</h3><p data-i18n="emailDesc">Check address syntax and public MX records, not mailbox existence.</p><label for="intel-email" data-i18n="emailAddress">Email address</label><input id="intel-email" name="value" type="email" placeholder="analyst@example.org" required maxlength="320"><button class="primary" type="submit" data-i18n="analyze">Analyze</button></form>
+          <form class="panel intel-card" data-intel-form data-endpoint="url"><h3 data-i18n="urlIntel">URL Inspector</h3><p data-i18n="urlDesc">Parse scheme, host, port and query indicators locally.</p><label for="intel-url" data-i18n="urlAddress">HTTP(S) URL</label><input id="intel-url" name="value" type="url" placeholder="https://example.org/path" required maxlength="2048"><button class="primary" type="submit" data-i18n="inspect">Inspect</button></form>
+          <form class="panel intel-card" data-intel-form data-endpoint="hash"><h3 data-i18n="hashIntel">Hash Identifier</h3><p data-i18n="hashDesc">Identify common digest-length candidates and provide public lookup links.</p><label for="intel-hash" data-i18n="fileHash">File hash</label><input id="intel-hash" name="value" placeholder="SHA-256 digest" required maxlength="128" pattern="[A-Fa-f0-9]+"><button class="primary" type="submit" data-i18n="identifyHash">Identify hash</button></form>
+          <form class="panel intel-card" data-intel-form data-endpoint="batch"><h3 data-i18n="batchIntel">Bulk IOC Triage</h3><p data-i18n="batchDesc">Classify up to 100 IPs, domains, URLs, email addresses or hashes.</p><label for="intel-batch" data-i18n="onePerLine">One indicator per line</label><textarea id="intel-batch" name="indicators" rows="4" placeholder="203.0.113.10&#10;example.org&#10;https://example.org" required maxlength="100000"></textarea><button class="primary" type="submit" data-i18n="triage">Triage indicators</button></form>
+        </div>
+        <div id="intel-output-panel" class="panel intel-output hidden"><div class="results-header"><div><div class="eyebrow" data-i18n="analysisOutput">ANALYSIS OUTPUT</div><h3 data-i18n="latestResult">Latest result</h3></div><button type="button" id="copy-intel-output" class="text-button" data-i18n="copyOutput">Copy output</button></div><div id="intel-status" class="notice" role="status"></div><div id="intel-links" class="intel-links"></div><pre id="intel-output"></pre></div>
+        <div class="warning-note" data-i18n="intelSafety">Passive-first: this toolkit does not scan ports, exploit systems, fetch arbitrary URLs, verify email mailboxes, or infer a person's identity. Use only for lawful research.</div>
+      </section>
+
+      <section id="view-lab" class="view hidden">
+        <div class="page-intro"><div class="eyebrow accent" data-i18n="labEyebrow">ANALYST LAB / 03</div><h2 data-i18n="labTitle">Analyst Lab</h2><p data-i18n="labIntro">Ten local-first utilities for evidence preparation, indicator extraction and repeatable analysis. Processing stays in your browser unless a tool explicitly says otherwise.</p></div>
+        <div class="lab-grid">
+          <article class="panel lab-card"><h3 data-i18n="iocExtractTitle">01 / IOC Extractor</h3><p data-i18n="iocExtractDesc">Extract likely IPs, domains, URLs, emails and hashes from pasted text.</p><textarea id="lab-ioc-input" rows="4" placeholder="Paste log lines or text…"></textarea><button class="primary" id="lab-ioc-run" data-i18n="extractIndicators">Extract indicators</button><pre id="lab-ioc-output" class="lab-output"></pre><button class="text-button" id="lab-ioc-copy" data-i18n="copyOutput">Copy output</button></article>
+          <article class="panel lab-card"><h3 data-i18n="defangTitle">02 / Defang & Refang</h3><p data-i18n="defangDesc">Make indicators safer to share, or restore their standard spelling.</p><select id="lab-defang-mode"><option value="defang" data-i18n="defangOption">Defang</option><option value="refang" data-i18n="refangOption">Refang</option></select><textarea id="lab-defang-input" rows="3" placeholder="hxxps://example[.]org"></textarea><button class="primary" id="lab-defang-run" data-i18n="transform">Transform</button><pre id="lab-defang-output" class="lab-output"></pre></article>
+          <article class="panel lab-card"><h3 data-i18n="base64Title">03 / Base64 utility</h3><p data-i18n="base64Desc">Encode or decode text locally using UTF-8 support.</p><select id="lab-base64-mode"><option value="encode" data-i18n="encode">Encode</option><option value="decode" data-i18n="decode">Decode</option></select><textarea id="lab-base64-input" rows="3" placeholder="Text or Base64…"></textarea><button class="primary" id="lab-base64-run" data-i18n="runTool">Run utility</button><pre id="lab-base64-output" class="lab-output"></pre></article>
+          <article class="panel lab-card"><h3 data-i18n="urlCodecTitle">04 / URL codec</h3><p data-i18n="urlCodecDesc">Encode or decode URL components without visiting a URL.</p><select id="lab-url-mode"><option value="encode" data-i18n="encode">Encode</option><option value="decode" data-i18n="decode">Decode</option></select><textarea id="lab-url-input" rows="3" placeholder="query=value with spaces"></textarea><button class="primary" id="lab-url-run" data-i18n="runTool">Run utility</button><pre id="lab-url-output" class="lab-output"></pre></article>
+          <article class="panel lab-card"><h3 data-i18n="shaTitle">05 / SHA-256 text digest</h3><p data-i18n="shaDesc">Calculate a SHA-256 digest of text locally. This does not hash a file.</p><textarea id="lab-sha-input" rows="3" placeholder="Text to hash…"></textarea><button class="primary" id="lab-sha-run" data-i18n="calculateHash">Calculate SHA-256</button><pre id="lab-sha-output" class="lab-output"></pre></article>
+          <article class="panel lab-card"><h3 data-i18n="timestampTitle">06 / Timestamp converter</h3><p data-i18n="timestampDesc">Convert Unix seconds or milliseconds into a readable UTC date.</p><input id="lab-timestamp-input" placeholder="e.g. 1792348800"><button class="primary" id="lab-timestamp-run" data-i18n="convertTime">Convert timestamp</button><pre id="lab-timestamp-output" class="lab-output"></pre></article>
+          <article class="panel lab-card"><h3 data-i18n="cidrTitle">07 / IPv4 CIDR calculator</h3><p data-i18n="cidrDesc">Calculate network, broadcast and usable host count locally.</p><input id="lab-cidr-input" placeholder="192.0.2.0/24"><button class="primary" id="lab-cidr-run" data-i18n="calculateNetwork">Calculate network</button><pre id="lab-cidr-output" class="lab-output"></pre></article>
+          <article class="panel lab-card"><h3 data-i18n="sourceScoreTitle">08 / Source assessment</h3><p data-i18n="sourceScoreDesc">A transparent checklist to assess source quality, not a truth detector.</p><label class="lab-check"><input type="checkbox" class="source-check"> <span data-i18n="sourcePrimary">Primary source or original record</span></label><label class="lab-check"><input type="checkbox" class="source-check"> <span data-i18n="sourceCorroborated">Independently corroborated</span></label><label class="lab-check"><input type="checkbox" class="source-check"> <span data-i18n="sourceRecent">Date and context are clear</span></label><label class="lab-check"><input type="checkbox" class="source-check"> <span data-i18n="sourceMethod">Collection method is documented</span></label><label class="lab-check"><input type="checkbox" class="source-check"> <span data-i18n="sourceBias">Potential bias and limitations noted</span></label><button class="primary" id="lab-source-run" data-i18n="assessSource">Assess source</button><pre id="lab-source-output" class="lab-output"></pre></article>
+          <article class="panel lab-card"><h3 data-i18n="relationshipTitle">09 / Relationship mapper</h3><p data-i18n="relationshipDesc">Record a simple lead relationship in a readable, exportable format.</p><input id="lab-rel-a" placeholder="Entity A"><input id="lab-rel-type" placeholder="relationship / evidence"><input id="lab-rel-b" placeholder="Entity B"><button class="primary" id="lab-rel-run" data-i18n="addRelationship">Add relationship</button><div id="lab-rel-output" class="lab-output"></div><button class="text-button" id="lab-rel-export" data-i18n="exportJson">Export JSON ↓</button></article>
+          <article class="panel lab-card"><h3 data-i18n="reportTitle">10 / Quick report builder</h3><p data-i18n="reportDesc">Create a timestamped research note and export it as a text report.</p><input id="lab-report-title" placeholder="Investigation title"><textarea id="lab-report-body" rows="4" placeholder="Scope, method, findings, limitations, sources…"></textarea><button class="primary" id="lab-report-run" data-i18n="buildReport">Build report</button><button class="text-button" id="lab-report-download" data-i18n="downloadReport">Download report</button><pre id="lab-report-output" class="lab-output"></pre></article>
+        </div>
+        <div class="warning-note" data-i18n="labNotice">These helpers run locally in the browser. Extracted indicators and relationship notes are leads, not verified facts. Avoid pasting passwords, private records or sensitive personal data.</div>
+      </section>
+
+      <section id="view-settings" class="view hidden">
+        <div class="page-intro"><div class="eyebrow accent" data-i18n="settingsEyebrow">WORKSPACE / PREFERENCES</div><h2 data-i18n="settingsTitle">Workspace settings</h2><p data-i18n="settingsIntro">Personalize the accent, density and motion preferences for this browser.</p></div>
+        <div class="panel settings-panel"><h3 data-i18n="appearanceTitle">Appearance</h3><label for="theme-accent" data-i18n="accentColor">Accent color</label><select id="theme-accent"><option value="green">Matrix green</option><option value="blue">Cyber blue</option><option value="purple">Signal purple</option><option value="amber">Amber terminal</option></select><label class="lab-check"><input id="compact-mode" type="checkbox"> <span data-i18n="compactMode">Compact layout</span></label><label class="lab-check"><input id="disable-motion" type="checkbox"> <span data-i18n="disableMotion">Disable extra animations</span></label><button class="primary" id="save-settings" data-i18n="saveSettings">Save preferences</button><p class="form-note" data-i18n="settingsLocal">Preferences are saved in this browser only.</p></div>
+      </section>
+
+      <section id="view-cases" class="view hidden">
+        <div class="page-intro"><div class="eyebrow accent" data-i18n="casesEyebrow">INVESTIGATION WORKSPACE / 02</div><h2 data-i18n="caseNotebook">Case notebook</h2><p data-i18n="caseIntro">Keep a clear record of investigation scope, authorization and notes.</p></div>
+        <form id="case-form" class="panel case-form">
+          <label for="case-title" data-i18n="caseTitle">Case title</label><input id="case-title" maxlength="120" placeholder="e.g. Authorized lab exercise" data-i18n-placeholder="caseTitlePlaceholder" required>
+          <label for="case-notes"><span data-i18n="notes">Notes</span> <span data-i18n="notesOptional">Optional, max 5000 characters</span></label><textarea id="case-notes" rows="4" maxlength="5000" placeholder="Scope, objective, source notes…" data-i18n-placeholder="notesPlaceholder"></textarea>
+          <div class="form-footer"><span class="form-note" data-i18n="savedSQLite">Saved to this instance's SQLite database.</span><button class="primary" type="submit" data-i18n="createCase">Create case +</button></div>
+        </form>
+        <div class="section-head"><div><div class="eyebrow" data-i18n="yourWork">YOUR WORK</div><h3 data-i18n="savedInvestigations">Saved investigations</h3></div><button class="text-button" id="refresh-cases"><span data-i18n="refresh">Refresh</span> ↻</button></div>
+        <div id="case-list" class="case-list"><div class="empty-state" data-i18n="loadingCases">Loading cases…</div></div>
+      </section>
+      <footer class="main-footer"><span data-i18n="footerResponsible">OMNITRACE / BUILT FOR RESPONSIBLE RESEARCH</span><span data-i18n="footerPublicSources">Public sources only · v0.5.1</span></footer>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="/static/app.js?v=0.5.1" defer></script>
+</body>
+</html>
