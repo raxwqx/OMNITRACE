@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#0b0e14">
   <meta name="description" content="OMNITRACE public-source OSINT investigation workspace">
   <title>OMNITRACE | Intelligence Workspace</title>
-  <link rel="stylesheet" href="/static/styles.css?v=0.5.1">
+  <link rel="stylesheet" href="/static/styles.css?v=5.0.0">
 </head>
 <body>
   <section id="system-intro" class="system-intro" aria-label="OMNITRACE system startup" aria-live="polite">
@@ -42,7 +42,7 @@
         <div><strong data-i18n="coreSystems">Core systems</strong><small id="system-status" data-i18n="checkingStatus">Checking status…</small></div>
         <span class="pulse"></span>
       </div>
-      <div class="sidebar-foot">OMNITRACE <span>v0.5.1</span><br><small data-i18n="publicResearchOnly">PUBLIC-SOURCE RESEARCH ONLY</small></div>
+      <div class="sidebar-foot">OMNITRACE <span>v5.0.0</span><br><small data-i18n="publicResearchOnly">PUBLIC-SOURCE RESEARCH ONLY</small></div>
     </aside>
 
     <main class="main">
@@ -140,13 +140,13 @@
           <label for="case-notes"><span data-i18n="notes">Notes</span> <span data-i18n="notesOptional">Optional, max 5000 characters</span></label><textarea id="case-notes" rows="4" maxlength="5000" placeholder="Scope, objective, source notes…" data-i18n-placeholder="notesPlaceholder"></textarea>
           <div class="form-footer"><span class="form-note" data-i18n="savedSQLite">Saved to this instance's SQLite database.</span><button class="primary" type="submit" data-i18n="createCase">Create case +</button></div>
         </form>
-        <div class="section-head"><div><div class="eyebrow" data-i18n="yourWork">YOUR WORK</div><h3 data-i18n="savedInvestigations">Saved investigations</h3></div><button class="text-button" id="refresh-cases"><span data-i18n="refresh">Refresh</span> ↻</button></div>
+        <div class="section-head"><div><div class="eyebrow" data-i18n="yourWork">YOUR WORK</div><h3 data-i18n="savedInvestigations">Saved investigations</h3></div><div class="section-actions"><button class="text-button" id="export-cases-csv" data-i18n="exportCases">Export cases CSV</button><button class="text-button" id="refresh-cases"><span data-i18n="refresh">Refresh</span> ↻</button></div></div>
         <div id="case-list" class="case-list"><div class="empty-state" data-i18n="loadingCases">Loading cases…</div></div>
       </section>
-      <footer class="main-footer"><span data-i18n="footerResponsible">OMNITRACE / BUILT FOR RESPONSIBLE RESEARCH</span><span data-i18n="footerPublicSources">Public sources only · v0.5.1</span></footer>
+      <footer class="main-footer"><span data-i18n="footerResponsible">OMNITRACE / BUILT FOR RESPONSIBLE RESEARCH</span><span data-i18n="footerPublicSources">Public sources only · v5.0.0</span></footer>
     </main>
   </div>
   <div id="toast" class="toast" role="status"></div>
-  <script src="/static/app.js?v=0.5.1" defer></script>
+  <script src="/static/app.js?v=5.0.0" defer></script>
 </body>
 </html>
