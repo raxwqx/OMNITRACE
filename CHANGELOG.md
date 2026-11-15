@@ -3,7 +3,7 @@
 ## 5.0.0 - 2026-11-15
 
 - Added one-click CSV export for saved investigation cases in the frontend.
-- Aligned the API, page labels, and static asset cache keys at version 5.0.0.
+- Aligned Python package metadata, the API, page labels, and static asset cache keys at version 5.0.0.
 
 
 Notable changes to OMNITRACE are documented here.
