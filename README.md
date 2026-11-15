@@ -5,7 +5,7 @@
   <p><strong>Open-Source Intelligence & Cyber Investigation Workspace</strong></p>
   <p>Follow public signals. Organize leads. Preserve context. Keep conclusions evidence-led.</p>
   <p>
-    <a href="https://github.com/raxwqx/OMNITRACE"><img src="https://img.shields.io/badge/version-0.5.1-9cffb5?style=for-the-badge&labelColor=101713" alt="Version 0.5.1" /></a>
+    <a href="https://github.com/raxwqx/OMNITRACE"><img src="https://img.shields.io/badge/version-5.0.0-9cffb5?style=for-the-badge&labelColor=101713" alt="Version 5.0.0" /></a>
     <img src="https://img.shields.io/badge/Python-3.11%2B-9bdcff?style=for-the-badge&logo=python&logoColor=white&labelColor=101713" alt="Python 3.11 or newer" />
     <img src="https://img.shields.io/badge/FastAPI-API-9cffb5?style=for-the-badge&logo=fastapi&logoColor=white&labelColor=101713" alt="FastAPI" />
     <img src="https://img.shields.io/badge/UI-Turkish%20%2F%20English-c5a6ff?style=for-the-badge&labelColor=101713" alt="Turkish and English UI" />
@@ -24,7 +24,7 @@
 
 OMNITRACE is a modular starter workspace for **authorized, public-source OSINT research**. It brings identity leads, IP and domain context, indicator triage, analyst utilities, and investigation notes into one bilingual interface. The goal is not to magically identify people; it is to help analysts structure leads, record context, and keep uncertainty visible.
 
-**Current release:** `v0.5.1` · **Platform:** local-first web application · **Backend:** FastAPI · **Database:** SQLite by default, PostgreSQL supported
+**Current release:** `v5.0.0` · **Platform:** local-first web application · **Backend:** FastAPI · **Database:** SQLite by default, PostgreSQL supported
 
 ---
 
@@ -63,6 +63,9 @@ OSINT work can get scattered across browser tabs, terminal commands, text files,
 - **Modular:** a foundation for carefully scoped provider adapters and future case workflows.
 
 ## ✨ Features
+
+- Export saved investigation cases as UTF-8 CSV from the frontend.
+
 
 | Module | What it does | Important boundary |
 |---|---|---|
@@ -374,6 +377,6 @@ Released under the [MIT License](LICENSE).
 
 <div align="center">
   <strong>OMNITRACE</strong><br />
-  <sub>Built for responsible public-source research · v0.5.1</sub><br />
+  <sub>Built for responsible public-source research · v5.0.0</sub><br />
   <sub>TR / EN · Local-first · Evidence-aware</sub>
 </div>
