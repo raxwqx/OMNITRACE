@@ -80,7 +80,9 @@ OSINT work can get scattered across browser tabs, terminal commands, text files,
 | **Investigation notebook** | Stores investigation titles, scope, and notes in the configured database. | Current starter is not a multi-user case-management service. |
 | **Analyst Lab** | Ten browser-local utilities for preparing and organizing data. | Outputs still need analyst review and corroboration. |
 | **Workspace settings** | Matrix green, cyber blue, signal purple, or amber accents; compact layout and motion preference. | Preferences are stored in the current browser. |
-| **Exports** | Identity results as JSON/CSV, copied candidate URLs, and timestamped quick reports. | Exported leads retain their unverified status. |
+| **Exports** | Identity results as JSON/CSV, saved investigation cases as UTF-8 CSV, copied candidate URLs, and timestamped quick reports. | Exported leads retain their unverified status. CSV cells are escaped and formula-prefixed values are neutralized. |
+
+To export saved investigations, open **Your Work → Saved investigations** and choose **Export cases CSV**. The download includes the case ID, title, notes, and creation time, with a UTF-8 BOM for spreadsheet compatibility. The export is created in the browser and does not add a server-side export file.
 
 ### Analyst Lab: 10 local-first utilities
 

@@ -32,14 +32,14 @@ def test_frontend_contains_matrix_intro_and_cache_busted_assets():
     html = response.text
     assert 'id="system-intro"' in html
     assert 'id="matrix-canvas"' in html
-    assert 'app.js?v=0.5.1' in html
-    assert 'styles.css?v=0.5.1' in html
-    assert 'v0.5.1' in html
+    assert 'app.js?v=5.0.0' in html
+    assert 'styles.css?v=5.0.0' in html
+    assert 'v5.0.0' in html
 
 
 def test_static_assets_are_served():
-    css = client.get("/static/styles.css?v=0.5.1")
-    js = client.get("/static/app.js?v=0.5.1")
+    css = client.get("/static/styles.css?v=5.0.0")
+    js = client.get("/static/app.js?v=5.0.0")
     assert css.status_code == 200 and ".system-intro" in css.text
     assert js.status_code == 200 and "matrix-canvas" in js.text
     assert "Always play on a fresh page load" in js.text
@@ -48,10 +48,20 @@ def test_static_assets_are_served():
     assert "Analyst Lab" in js.text
 
 
+def test_saved_case_csv_export_is_available_and_formula_safe():
+    html = client.get("/").text
+    js = client.get("/static/app.js?v=5.0.0").text
+    assert 'id="export-cases-csv"' in html
+    assert "async function exportCasesCsv()" in js
+    assert "data.cases || []" in js
+    assert """text.replaceAll('"', '""')""" in js
+    assert "\\u0000-\\u0020" in js
+
+
 def test_health_reports_current_version():
     response = client.get("/api/health")
     assert response.status_code == 200
-    assert response.json()["version"] == "0.5.1"
+    assert response.json()["version"] == "5.0.0"
 
 
 def test_analyst_lab_and_settings_are_present():

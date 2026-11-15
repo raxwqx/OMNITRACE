@@ -339,7 +339,7 @@ function exportIdentityJson() {
 }
 function csvCell(value) {
   let text = String(value ?? '');
-  if (/^[\t\r ]*[=+@\-]/.test(text)) text = `'${text}`;
+  if (/^[\u0000-\u0020]*[=+@\-]/.test(text)) text = `'${text}`;
   return `"${text.replaceAll('"', '""')}"`;
 }
 function exportIdentityCsv() {
