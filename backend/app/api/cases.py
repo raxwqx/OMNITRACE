@@ -6,7 +6,8 @@ router = APIRouter(prefix="/api/cases", tags=["Investigations"])
 
 @router.get("")
 def get_cases():
-    return {"cases": list_cases(), "count": len(list_cases())}
+    cases = list_cases()
+    return {"cases": cases, "count": len(cases)}
 
 @router.post("", status_code=201)
 def post_case(payload: CaseCreate):
