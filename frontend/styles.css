@@ -38,7 +38,7 @@ body{background:radial-gradient(ellipse at 70% -15%,#102214 0%,#030604 48%);back
 @media(max-width:540px){.intro-kicker{font-size:8px;letter-spacing:1px}.intro-logo{letter-spacing:.04em}.terminal-window{margin-top:25px}.terminal-body{font-size:10px;padding:13px;min-height:120px}}
 
 
-/* v0.5.1 Analyst Lab and personalization */
+/* v0.6.0 Indicator Watchlist, Analyst Lab, and personalization */
 .lab-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.lab-card{padding:18px;display:flex;flex-direction:column;align-items:stretch;gap:10px;min-width:0}.lab-card h3{margin:0;font-size:14px}.lab-card p{margin:0;color:var(--muted);font-size:11px;line-height:1.65;min-height:34px}.lab-card textarea,.lab-card input,.lab-card select,.settings-panel select{width:100%;min-width:0;border:1px solid var(--border);border-radius:8px;background:#050a06;color:var(--text);padding:11px;font:12px 'DM Mono',monospace}.lab-card .primary{align-self:flex-start}.lab-output{min-height:28px;max-height:210px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;margin:0;padding:10px;border:1px solid var(--border);border-radius:7px;background:#040805;color:#c9ffb4;font:11px/1.65 'DM Mono',monospace}.lab-check{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:11px;line-height:1.5}.lab-check input{width:auto;accent-color:var(--green)}.relationship-row{padding:7px 2px;border-bottom:1px solid var(--border);font-size:11px;overflow-wrap:anywhere}.settings-panel{max-width:620px;padding:22px;display:flex;flex-direction:column;gap:14px}.settings-panel h3{margin:0 0 5px}.settings-panel>label:not(.lab-check){font-size:12px;color:var(--muted)}.settings-panel .primary{align-self:flex-start}.compact-mode .panel,.compact-mode .stat-card,.compact-mode .module-card{padding:12px}.compact-mode .lab-grid,.compact-mode .module-grid{gap:8px}.motion-reduced *, .motion-reduced *::before,.motion-reduced *::after{animation-duration:0.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:0.001ms!important}
 :root[data-accent="blue"]{--green:#65b8ff;--blue:#65b8ff;--violet:#65b8ff}
 :root[data-accent="purple"]{--green:#c18aff;--blue:#c18aff;--violet:#c18aff}
@@ -50,3 +50,17 @@ body{background:radial-gradient(ellipse at 70% -15%,#102214 0%,#030604 48%);back
 :root[data-accent="purple"] .accent,:root[data-accent="purple"] .hero h2 span,:root[data-accent="purple"] .text-button,:root[data-accent="purple"] .module-link{color:#d1a7ff}
 :root[data-accent="amber"] .accent,:root[data-accent="amber"] .hero h2 span,:root[data-accent="amber"] .text-button,:root[data-accent="amber"] .module-link{color:#ffd18a}
 @media(max-width:760px){.lab-grid{grid-template-columns:1fr}.lab-card{padding:15px}}
+.watchlist-actions{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.watchlist-actions select{background:#0d131c;color:var(--text);border:1px solid #303d50;border-radius:7px;padding:7px 9px;font-size:11px}
+.case-form select{background:#0d131c;color:var(--text);border:1px solid #303d50;border-radius:8px;padding:12px;width:100%;margin-bottom:9px}
+.watchlist-summary{margin-bottom:14px}
+.watchlist-stat strong{font-size:23px}
+.watchlist-stat span{display:block;color:var(--muted);font-size:10px;margin-top:6px;line-height:1.6}
+.indicator-card{display:flex;flex-direction:column;gap:6px}
+.indicator-card .indicator-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.indicator-card h4{overflow-wrap:anywhere;margin:0}
+.indicator-card .text-button{align-self:flex-start;padding-left:0;margin-top:4px}
+.indicator-badge{flex-shrink:0;font:8px 'DM Mono',monospace;letter-spacing:.6px;text-transform:uppercase;padding:5px 7px;border-radius:5px;border:1px solid #315632;background:#102113;color:#c5ffae}
+.indicator-badge.type-url,.indicator-badge.type-email{border-color:#2e4563;background:#172337;color:#9ebbe0}
+.indicator-badge.type-hash{border-color:#4c422b;background:#2a2418;color:#e4c580}
+@media(max-width:540px){.watchlist-actions{width:100%}.watchlist-actions select{flex:1}}

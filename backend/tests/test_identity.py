@@ -24,6 +24,12 @@ def test_rejects_invalid_username():
     response = client.post("/api/identity/search", json={"username": "bad name!"})
     assert response.status_code == 422
 
+
+def test_identity_username_is_trimmed():
+    response = client.post("/api/identity/search", json={"username": "  spaced_user  ", "platforms": ["github"]})
+    assert response.status_code == 200
+    assert response.json()["query"] == "spaced_user"
+
 def test_rejects_unknown_platform():
     response = client.post("/api/identity/search", json={
         "username": "tester", "platforms": ["unknown_social"]
@@ -74,3 +80,9 @@ def test_platform_catalog_has_expected_keys():
     response = client.get("/api/identity/platforms")
     keys = {item["key"] for item in response.json()["platforms"]}
     assert {"github", "reddit", "instagram", "bluesky", "mastodon"}.issubset(keys)
+
+
+def test_rejects_username_without_letters_or_numbers():
+    for username in ("...", "___", "---", "._-"):
+        response = client.post("/api/identity/search", json={"username": username})
+        assert response.status_code == 422, username

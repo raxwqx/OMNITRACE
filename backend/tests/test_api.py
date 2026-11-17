@@ -32,14 +32,14 @@ def test_frontend_contains_matrix_intro_and_cache_busted_assets():
     html = response.text
     assert 'id="system-intro"' in html
     assert 'id="matrix-canvas"' in html
-    assert 'app.js?v=0.5.1' in html
-    assert 'styles.css?v=0.5.1' in html
-    assert 'v0.5.1' in html
+    assert 'app.js?v=0.6.0' in html
+    assert 'styles.css?v=0.6.0' in html
+    assert 'v0.6.0' in html
 
 
 def test_static_assets_are_served():
-    css = client.get("/static/styles.css?v=0.5.1")
-    js = client.get("/static/app.js?v=0.5.1")
+    css = client.get("/static/styles.css?v=0.6.0")
+    js = client.get("/static/app.js?v=0.6.0")
     assert css.status_code == 200 and ".system-intro" in css.text
     assert js.status_code == 200 and "matrix-canvas" in js.text
     assert "Always play on a fresh page load" in js.text
@@ -51,7 +51,7 @@ def test_static_assets_are_served():
 def test_health_reports_current_version():
     response = client.get("/api/health")
     assert response.status_code == 200
-    assert response.json()["version"] == "0.5.1"
+    assert response.json()["version"] == "0.6.0"
 
 
 def test_analyst_lab_and_settings_are_present():
@@ -63,6 +63,10 @@ def test_analyst_lab_and_settings_are_present():
         "lab-base64-run", "lab-url-run", "lab-sha-run", "lab-timestamp-run",
         "lab-cidr-run", "lab-source-run", "lab-rel-run", "lab-report-run",
         "theme-accent", "compact-mode", "disable-motion",
+        "view-watchlist", "indicator-form", "indicator-value",
+        "indicator-note", "indicator-case", "indicator-filter",
+        "indicator-summary", "indicator-list", "indicator-export-json",
+        "indicator-export-csv", "refresh-indicators",
     ):
         assert feature_id in html
 

@@ -7,6 +7,7 @@ from backend.app.core.config import APP_NAME, APP_VERSION
 from backend.app.api.identity import router as identity_router
 from backend.app.api.cases import router as cases_router
 from backend.app.api.intel import router as intel_router
+from backend.app.api.indicators import router as indicators_router
 from backend.app.services.cases import initialize
 
 BASE_DIR = Path(__file__).resolve().parents[2]
@@ -26,6 +27,7 @@ app = FastAPI(
 app.include_router(identity_router)
 app.include_router(cases_router)
 app.include_router(intel_router)
+app.include_router(indicators_router)
 app.mount("/static", StaticFiles(directory=str(FRONTEND_DIR)), name="static")
 
 @app.get("/api/health", tags=["System"])

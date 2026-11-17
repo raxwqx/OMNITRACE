@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import timezone
 from sqlalchemy import select
 from backend.app.db import Base, SessionLocal, engine
 from backend.app.models.db_models import Case
@@ -6,6 +6,7 @@ from backend.app.models.db_models import Case
 
 def initialize(_db_path=None):
     """Create current schema. _db_path is retained for compatibility with v0.1 tests."""
+    from backend.app.models import db_models  # noqa: F401  (register all tables)
     Base.metadata.create_all(bind=engine)
 
 

@@ -2,6 +2,31 @@
 
 Notable changes to OMNITRACE are documented here.
 
+## 0.6.0 - Indicator Watchlist and hardening
+
+### Added
+
+- **Indicator Watchlist** (`Gösterge İzleme Listesi`): save IPs, domains,
+  URLs, email addresses and hashes with automatic type classification, an
+  optional note, and an optional case link.
+- Case-linked filtering and per-type summaries for saved indicators.
+- Duplicate detection per case, plus JSON and CSV export from the browser.
+- `/api/indicators` endpoints: create, list/filter and delete. Saving is local
+  and passive; no network request is made for an indicator.
+- `SECURITY.md`, Dependabot configuration, and a GitHub Actions CI matrix
+  (Python 3.11, 3.12, 3.13) with pip caching, lint, compile and JS checks.
+- Full Turkish README (`README.tr.md`) alongside the English `README.md`.
+
+### Fixed
+
+- `/api/cases` no longer runs the same list query twice per request.
+- Usernames made only of dots, underscores or hyphens are rejected.
+- Case notes and indicator values are trimmed consistently.
+- Unused imports and an unused variable were removed from the API modules.
+- The outbound provider User-Agent now reports the real application version
+  instead of a stale `0.4.1` string.
+- The MIT license text is complete, so GitHub detects the license correctly.
+
 ## 0.5.1 - Matrix intro reliability and Analyst Lab
 
 - Matrix startup intro now plays on every fresh page load and remains skippable.
