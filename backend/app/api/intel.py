@@ -1,7 +1,6 @@
 """Safe, bounded OSINT utilities: validate and enrich public indicators only."""
 from __future__ import annotations
 
-import hashlib
 import ipaddress
 import re
 import json
@@ -9,9 +8,12 @@ from urllib.parse import urlparse, urlencode
 from urllib.request import Request, urlopen
 from urllib.error import URLError, HTTPError
 
+import dns.exception
 import dns.resolver
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field, field_validator
+
+from backend.app.core.config import APP_VERSION
 
 router = APIRouter(prefix="/api/intel", tags=["OSINT Intelligence"])
 
@@ -108,9 +110,8 @@ def _is_ip(value: str) -> bool:
 
 def _fetch_public_json(url: str, *, timeout: float = 5.0, max_bytes: int = 2_000_000):
     """Fetch JSON only from fixed, public OSINT providers with a strict size/time bound."""
-    request = Request(url, headers={"User-Agent": "OMNITRACE-OSINT/0.4.1 (passive research)", "Accept": "application/json"})
+    request = Request(url, headers={"User-Agent": f"OMNITRACE-OSINT/{APP_VERSION} (passive research)", "Accept": "application/json"})
     with urlopen(request, timeout=timeout) as response:
-        content_type = response.headers.get("Content-Type", "")
         if response.status != 200:
             raise RuntimeError(f"Provider returned HTTP {response.status}")
         raw = response.read(max_bytes + 1)
@@ -227,7 +228,7 @@ def inspect_email(payload: IndicatorRequest):
         status = "records_found" if mx else "no_mx_record_found"
     except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
         status = "no_mx_record_found"
-    except dns.exception.DNSException as exc:
+    except dns.exception.DNSException:
         status = "lookup_error"
         mx = []
     return {"address": value, "local_part_present": bool(local), "domain": domain,

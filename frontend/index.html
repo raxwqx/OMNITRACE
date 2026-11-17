@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#0b0e14">
   <meta name="description" content="OMNITRACE public-source OSINT investigation workspace">
   <title>OMNITRACE | Intelligence Workspace</title>
-  <link rel="stylesheet" href="/static/styles.css?v=0.5.1">
+  <link rel="stylesheet" href="/static/styles.css?v=0.6.0">
 </head>
 <body>
   <section id="system-intro" class="system-intro" aria-label="OMNITRACE system startup" aria-live="polite">
@@ -35,6 +35,7 @@
       <button class="nav-item" data-view="identity"><span>◎</span> <span data-i18n="identity">Identity Intelligence</span></button>
       <button class="nav-item" data-view="intel"><span>⌘</span> <span data-i18n="osintTools">OSINT Toolkit</span></button>
       <button class="nav-item" data-view="cases"><span>▤</span> <span data-i18n="investigations">Investigations</span></button>
+      <button class="nav-item" data-view="watchlist"><span>◉</span> <span data-i18n="watchlist">Indicator Watchlist</span></button>
       <button class="nav-item" data-view="lab"><span>⌬</span> <span data-i18n="analystLab">Analyst Lab</span></button>
       <button class="nav-item" data-view="settings"><span>⚙</span> <span data-i18n="settings">Settings</span></button>
       <div class="sidebar-bottom">
@@ -42,7 +43,7 @@
         <div><strong data-i18n="coreSystems">Core systems</strong><small id="system-status" data-i18n="checkingStatus">Checking status…</small></div>
         <span class="pulse"></span>
       </div>
-      <div class="sidebar-foot">OMNITRACE <span>v0.5.1</span><br><small data-i18n="publicResearchOnly">PUBLIC-SOURCE RESEARCH ONLY</small></div>
+      <div class="sidebar-foot">OMNITRACE <span>v0.6.0</span><br><small data-i18n="publicResearchOnly">PUBLIC-SOURCE RESEARCH ONLY</small></div>
     </aside>
 
     <main class="main">
@@ -143,10 +144,26 @@
         <div class="section-head"><div><div class="eyebrow" data-i18n="yourWork">YOUR WORK</div><h3 data-i18n="savedInvestigations">Saved investigations</h3></div><button class="text-button" id="refresh-cases"><span data-i18n="refresh">Refresh</span> ↻</button></div>
         <div id="case-list" class="case-list"><div class="empty-state" data-i18n="loadingCases">Loading cases…</div></div>
       </section>
-      <footer class="main-footer"><span data-i18n="footerResponsible">OMNITRACE / BUILT FOR RESPONSIBLE RESEARCH</span><span data-i18n="footerPublicSources">Public sources only · v0.5.1</span></footer>
+
+      <section id="view-watchlist" class="view hidden">
+        <div class="page-intro"><div class="eyebrow accent" data-i18n="watchlistEyebrow">INDICATOR REGISTRY / 03</div><h2 data-i18n="watchlistTitle">Indicator Watchlist</h2><p data-i18n="watchlistIntro">Save IPs, domains, URLs, email addresses and hashes with their type, a note, and an optional case. Duplicates are detected locally.</p></div>
+        <form id="indicator-form" class="panel case-form">
+          <label for="indicator-value"><span data-i18n="indicatorValue">Indicator</span> <span data-i18n="indicatorValueHint">IP, domain, URL, email address or hash</span></label>
+          <input id="indicator-value" maxlength="2048" placeholder="8.8.8.8" required autocomplete="off">
+          <label for="indicator-note"><span data-i18n="indicatorNote">Note</span> <span data-i18n="indicatorNoteHint">Optional context</span></label>
+          <input id="indicator-note" maxlength="2000" placeholder="Why this indicator matters…">
+          <label for="indicator-case" data-i18n="indicatorCase">Attach to case (optional)</label>
+          <select id="indicator-case"><option value="" data-i18n="noCase">No case</option></select>
+          <div class="form-footer"><span class="form-note" data-i18n="indicatorSavedNote">Saved locally with automatic type classification. No network request is made.</span><button class="primary" type="submit" data-i18n="addIndicator">Add indicator +</button></div>
+        </form>
+        <div class="section-head"><div><div class="eyebrow" data-i18n="watchlistRegistry">REGISTRY</div><h3 data-i18n="savedIndicators">Saved indicators</h3></div><div class="watchlist-actions"><select id="indicator-filter" aria-label="Filter by indicator type"><option value="" data-i18n="allTypes">All types</option><option value="ip">IP</option><option value="domain">Domain</option><option value="url">URL</option><option value="email">Email</option><option value="hash">Hash</option></select><button class="text-button" id="indicator-export-json" data-i18n="exportJson">Export JSON ↓</button><button class="text-button" id="indicator-export-csv" data-i18n="indicatorExportCsv">Export CSV ↓</button><button class="text-button" id="refresh-indicators"><span data-i18n="refresh">Refresh</span> ↻</button></div></div>
+        <div id="indicator-summary" class="stat-grid watchlist-summary"></div>
+        <div id="indicator-list" class="case-list"><div class="empty-state" data-i18n="loadingIndicators">Loading indicators…</div></div>
+      </section>
+      <footer class="main-footer"><span data-i18n="footerResponsible">OMNITRACE / BUILT FOR RESPONSIBLE RESEARCH</span><span data-i18n="footerPublicSources">Public sources only · v0.6.0</span></footer>
     </main>
   </div>
   <div id="toast" class="toast" role="status"></div>
-  <script src="/static/app.js?v=0.5.1" defer></script>
+  <script src="/static/app.js?v=0.6.0" defer></script>
 </body>
 </html>

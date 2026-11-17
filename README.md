@@ -5,7 +5,7 @@
   <p><strong>Open-Source Intelligence & Cyber Investigation Workspace</strong></p>
   <p>Follow public signals. Organize leads. Preserve context. Keep conclusions evidence-led.</p>
   <p>
-    <a href="https://github.com/raxwqx/OMNITRACE"><img src="https://img.shields.io/badge/version-0.5.1-9cffb5?style=for-the-badge&labelColor=101713" alt="Version 0.5.1" /></a>
+    <a href="https://github.com/raxwqx/OMNITRACE"><img src="https://img.shields.io/badge/version-0.6.0-9cffb5?style=for-the-badge&labelColor=101713" alt="Version 0.6.0" /></a>
     <img src="https://img.shields.io/badge/Python-3.11%2B-9bdcff?style=for-the-badge&logo=python&logoColor=white&labelColor=101713" alt="Python 3.11 or newer" />
     <img src="https://img.shields.io/badge/FastAPI-API-9cffb5?style=for-the-badge&logo=fastapi&logoColor=white&labelColor=101713" alt="FastAPI" />
     <img src="https://img.shields.io/badge/UI-Turkish%20%2F%20English-c5a6ff?style=for-the-badge&labelColor=101713" alt="Turkish and English UI" />
@@ -16,7 +16,8 @@
     <a href="#-quick-start">Quick start</a> ·
     <a href="#-screens-and-modules">Modules</a> ·
     <a href="#-api-examples">API examples</a> ·
-    <a href="#-security-and-responsible-use">Responsible use</a>
+    <a href="#-security-and-responsible-use">Responsible use</a> ·
+    <a href="README.tr.md">Türkçe</a>
   </p>
 </div>
 
@@ -24,7 +25,7 @@
 
 OMNITRACE is a modular starter workspace for **authorized, public-source OSINT research**. It brings identity leads, IP and domain context, indicator triage, analyst utilities, and investigation notes into one bilingual interface. The goal is not to magically identify people; it is to help analysts structure leads, record context, and keep uncertainty visible.
 
-**Current release:** `v0.5.1` · **Platform:** local-first web application · **Backend:** FastAPI · **Database:** SQLite by default, PostgreSQL supported
+**Current release:** `v0.6.0` · **Platform:** local-first web application · **Backend:** FastAPI · **Database:** SQLite by default, PostgreSQL supported
 
 ---
 
@@ -74,10 +75,11 @@ OSINT work can get scattered across browser tabs, terminal commands, text files,
 | **URL inspector** | Parses HTTP(S) URL components locally and highlights basic indicators. | The submitted URL is not fetched by this tool. |
 | **Hash identifier** | Recognizes common hexadecimal digest lengths and offers optional external lookup links. | Length-based algorithm identification can be ambiguous; reputation is not queried automatically. |
 | **Bulk IOC triage** | Classifies and deduplicates up to 100 IPs, domains, URLs, email addresses, and common hashes. | Classification is a helper, not a threat verdict. |
+| **Indicator Watchlist** | Saves IPs, domains, URLs, email addresses, and hashes with an automatic type, an optional note, and an optional case link. Supports case filtering, duplicate detection, and JSON/CSV export. | A saved value is a local record, not a verdict. A case link is organizational context, not evidence of involvement. |
 | **Investigation notebook** | Stores investigation titles, scope, and notes in the configured database. | Current starter is not a multi-user case-management service. |
 | **Analyst Lab** | Ten browser-local utilities for preparing and organizing data. | Outputs still need analyst review and corroboration. |
 | **Workspace settings** | Matrix green, cyber blue, signal purple, or amber accents; compact layout and motion preference. | Preferences are stored in the current browser. |
-| **Exports** | Identity results as JSON/CSV, copied candidate URLs, and timestamped quick reports. | Exported leads retain their unverified status. |
+| **Exports** | Identity results as JSON/CSV, copied candidate URLs, timestamped quick reports, and the indicator watchlist as JSON/CSV. | Exported leads and indicators retain their unverified status. |
 
 ### Analyst Lab: 10 local-first utilities
 
@@ -97,6 +99,17 @@ OSINT work can get scattered across browser tabs, terminal commands, text files,
 
 </details>
 
+### What's new in v0.6.0
+
+- **Indicator Watchlist:** save IPs, domains, URLs, email addresses, and hashes with automatic type classification, a note, and an optional case link. The same value is not duplicated within one case, but may be tracked separately under different cases.
+- **Case filtering and type summary:** review saved indicators per case, filter by type, and see the total and per-type counts.
+- **JSON/CSV export:** download the watchlist for a report, spreadsheet, or hand-off.
+- **Fixed:** `/api/cases` no longer runs the same list query twice per request.
+- **Fixed:** usernames containing only dots, underscores, or hyphens are rejected.
+- **Fixed:** case notes and indicator values are trimmed consistently; indicator validation lives in one place.
+- **Fixed:** unused imports and variables were removed, and the provider User-Agent now reports the real version.
+- **Hardening:** complete MIT license, Dependabot, `SECURITY.md`, and a pip-cached CI matrix (Python 3.11–3.13).
+
 ## 🖥️ Screens and modules
 
 The interface uses a dark, Matrix-inspired theme with acid-green accents. The startup sequence plays on each fresh page load and can be skipped.
@@ -107,6 +120,7 @@ The interface uses a dark, Matrix-inspired theme with acid-green accents. The st
 | **Identity Intelligence** | Build candidate profile links across supported platforms and export the result list. |
 | **OSINT Toolkit** | Inspect IPs, domains, email domains, URLs, hashes, and bulk indicators. |
 | **Investigations** | Keep case scope and research notes together. |
+| **Indicator Watchlist** | Save indicators with a type, note, and optional case; filter, export, and remove entries. |
 | **Analyst Lab** | Run ten small local-first data preparation utilities in the browser. |
 | **Settings** | Switch language and adjust visual preferences. |
 
@@ -118,9 +132,11 @@ flowchart TD
     B --> C[Identity API]
     B --> D[Intelligence API]
     B --> E[Investigation API]
+    B --> L[Indicator Watchlist API]
     C --> F[Provider registry<br/>candidate URLs]
     D --> G[IP parsing · DNS · RDAP links<br/>CT search · IOC triage]
     E --> H[SQLAlchemy persistence]
+    L --> H
     H --> I[(SQLite local default)]
     H --> J[(PostgreSQL optional)]
     A --> K[Analyst Lab<br/>browser-local utilities]
@@ -265,6 +281,26 @@ curl -X POST http://127.0.0.1:8000/api/intel/batch \
   -d '{"indicators":["8.8.8.8","example.org","https://example.org","d41d8cd98f00b204e9800998ecf8427e"]}'
 ```
 
+### Indicator watchlist
+
+```bash
+# Add an indicator (the type is classified automatically)
+curl -X POST http://127.0.0.1:8000/api/indicators \
+  -H 'Content-Type: application/json' \
+  -d '{"value":"8.8.8.8","note":"Resolver IP","case_id":null}'
+
+# List and filter by type
+curl 'http://127.0.0.1:8000/api/indicators?indicator_type=ip'
+
+# Indicators attached to one case
+curl 'http://127.0.0.1:8000/api/indicators?case_id=1'
+
+# Remove an entry
+curl -X DELETE http://127.0.0.1:8000/api/indicators/1
+```
+
+Saving an indicator is a local database write. No network request is made for the indicator value, and a `duplicate` flag in the response marks values already tracked for that case.
+
 ### Create and list investigation notes
 
 ```bash
@@ -291,7 +327,7 @@ Or activate the virtual environment and run:
 python -m pytest -q
 ```
 
-The test suite uses a temporary SQLite database and mocks external RDAP/Certificate Transparency responses where appropriate. It does not require live OSINT provider access. JavaScript syntax checks are also run when Node.js is available.
+The test suite uses a temporary SQLite database and mocks external RDAP/Certificate Transparency responses where appropriate. It does not require live OSINT provider access. JavaScript syntax checks are also run when Node.js is available. GitHub Actions runs the same checks on Python 3.11, 3.12, and 3.13 for every push and pull request.
 
 ## 📁 Project structure
 
@@ -302,10 +338,11 @@ OMNITRACE/
 │   │   ├── api/
 │   │   │   ├── identity.py       # Identity candidate search API
 │   │   │   ├── cases.py          # Investigation notebook API
+│   │   │   ├── indicators.py     # Indicator watchlist API
 │   │   │   └── intel.py          # IP, DNS, email, URL, hash, bulk IOC
 │   │   ├── core/                 # App configuration
-│   │   ├── models/               # Request and response schemas
-│   │   ├── services/             # Identity and case services
+│   │   ├── models/               # Request/response schemas and DB models
+│   │   ├── services/             # Identity, case, and indicator services
 │   │   ├── db.py                 # SQLAlchemy engine and sessions
 │   │   └── main.py               # FastAPI app and static frontend
 │   └── tests/                    # API and service tests
@@ -315,6 +352,9 @@ OMNITRACE/
 │   └── app.js                    # Navigation and browser-side tools
 ├── docs/assets/
 │   └── omnitrace-preview.svg     # README interface illustration
+├── .github/
+│   ├── workflows/tests.yml       # CI matrix
+│   └── dependabot.yml            # Dependency updates
 ├── Dockerfile
 ├── docker-compose.yml
 ├── pyproject.toml
@@ -322,6 +362,9 @@ OMNITRACE/
 ├── run.sh                        # Local launcher
 ├── test.sh                       # Test runner
 ├── CHANGELOG.md
+├── SECURITY.md
+├── README.md                     # English (this file)
+├── README.tr.md                  # Turkish
 └── LICENSE
 ```
 
@@ -344,13 +387,14 @@ OMNITRACE is a research starter, **not yet a hardened multi-user public service*
 - **Parsed ≠ safe.** A syntactically valid indicator has no automatic safety verdict.
 - **Correlation ≠ identity.** Similar usernames or shared infrastructure are not proof that two entities are the same person.
 - **Analyst tools ≠ source of truth.** Review and corroborate outputs before making decisions.
+- **Watchlist ≠ threat verdict.** The watchlist only stores the values and notes you enter. Exported JSON/CSV files may contain investigation data; review them before sharing.
 
 ## 🗺️ Roadmap
 
 Planned work, subject to design and testing:
 
-- **v0.6:** database migrations, authentication, and user-scoped investigations.
-- **v0.6+:** evidence graph, timeline, and richer HTML/JSON reports.
+- **v0.7:** database migrations, authentication, and user-scoped investigations.
+- **v0.7+:** evidence graph, timeline, and richer HTML/JSON reports.
 - **Future adapters:** opt-in threat-intelligence integrations with explicit API keys, source provenance, and rate-limit handling.
 - **v1.0:** deployment hardening, integration tests, and operational documentation.
 
@@ -374,6 +418,6 @@ Released under the [MIT License](LICENSE).
 
 <div align="center">
   <strong>OMNITRACE</strong><br />
-  <sub>Built for responsible public-source research · v0.5.1</sub><br />
+  <sub>Built for responsible public-source research · v0.6.0</sub><br />
   <sub>TR / EN · Local-first · Evidence-aware</sub>
 </div>

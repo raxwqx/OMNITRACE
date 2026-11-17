@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 
 APP_NAME = "OMNITRACE"
-APP_VERSION = "0.5.1"
+APP_VERSION = "0.6.0"
 
 # PostgreSQL is the recommended deployment database. SQLite remains a convenient
 # zero-configuration option for local development and tests.

@@ -114,7 +114,7 @@ const translations = {
     casesEyebrow: "INVESTIGATION WORKSPACE / 02", caseIntro: "Keep a clear record of investigation scope, authorization and notes.",
     caseTitle: "Case title", notes: "Notes", notesOptional: "Optional, max 5000 characters", savedSQLite: "Saved to this instance's configured database.",
     createCase: "Create case +", yourWork: "YOUR WORK", savedInvestigations: "Saved investigations", refresh: "Refresh", loadingCases: "Loading cases…",
-    footerResponsible: "OMNITRACE / BUILT FOR RESPONSIBLE RESEARCH", footerPublicSources: "Public sources only · v0.5.1",
+    footerResponsible: "OMNITRACE / BUILT FOR RESPONSIBLE RESEARCH", footerPublicSources: "Public sources only · v0.6.0",
     usernamePlaceholder: "example_user", caseTitlePlaceholder: "e.g. Authorized lab exercise", notesPlaceholder: "Scope, objective, source notes…",
     apiOnline: "API online", apiUnavailable: "API unavailable", platformLoadError: "Could not load platform list: {error}",
     selectPlatform: "Select at least one platform.", preparing: "Preparing…", resultCount: "{count} candidates",
@@ -138,6 +138,16 @@ const translations = {
     analystLab: "Analyst Lab", settings: "Settings", labEyebrow: "ANALYST LAB / 03", labTitle: "Analyst Lab", labIntro: "Ten local-first utilities for evidence preparation, indicator extraction and repeatable analysis. Processing stays in your browser unless a tool explicitly says otherwise.",
     iocExtractTitle: "01 / IOC Extractor", iocExtractDesc: "Extract likely IPs, domains, URLs, emails and hashes from pasted text.", extractIndicators: "Extract indicators", defangTitle: "02 / Defang & Refang", defangDesc: "Make indicators safer to share, or restore their standard spelling.", defangOption: "Defang", refangOption: "Refang", transform: "Transform", base64Title: "03 / Base64 utility", base64Desc: "Encode or decode text locally using UTF-8 support.", encode: "Encode", decode: "Decode", runTool: "Run utility", urlCodecTitle: "04 / URL codec", urlCodecDesc: "Encode or decode URL components without visiting a URL.", shaTitle: "05 / SHA-256 text digest", shaDesc: "Calculate a SHA-256 digest of text locally. This does not hash a file.", calculateHash: "Calculate SHA-256", timestampTitle: "06 / Timestamp converter", timestampDesc: "Convert Unix seconds or milliseconds into a readable UTC date.", convertTime: "Convert timestamp", cidrTitle: "07 / IPv4 CIDR calculator", cidrDesc: "Calculate network, broadcast and usable host count locally.", calculateNetwork: "Calculate network", sourceScoreTitle: "08 / Source assessment", sourceScoreDesc: "A transparent checklist to assess source quality, not a truth detector.", sourcePrimary: "Primary source or original record", sourceCorroborated: "Independently corroborated", sourceRecent: "Date and context are clear", sourceMethod: "Collection method is documented", sourceBias: "Potential bias and limitations noted", assessSource: "Assess source", relationshipTitle: "09 / Relationship mapper", relationshipDesc: "Record a simple lead relationship in a readable, exportable format.", addRelationship: "Add relationship", reportTitle: "10 / Quick report builder", reportDesc: "Create a timestamped research note and export it as a text report.", buildReport: "Build report", downloadReport: "Download report", labNotice: "These helpers run locally in the browser. Extracted indicators and relationship notes are leads, not verified facts. Avoid pasting passwords, private records or sensitive personal data.", settingsEyebrow: "WORKSPACE / PREFERENCES", settingsTitle: "Workspace settings", settingsIntro: "Personalize the accent, density and motion preferences for this browser.", appearanceTitle: "Appearance", accentColor: "Accent color", compactMode: "Compact layout", disableMotion: "Disable extra animations", saveSettings: "Save preferences", settingsLocal: "Preferences are saved in this browser only.",
     sourceAssessmentResult: "Source assessment: {score}/5 checks completed. This is a process checklist, not a credibility verdict.", indicatorsFound: "Extracted {count} unique indicators.", noIndicators: "No likely indicators found.", copied: "Copied to clipboard.", relationshipAdded: "Relationship added.", reportBuilt: "Report built.", settingsSaved: "Preferences saved.", invalidInput: "Please check the input and try again.", networkInvalid: "Enter a valid IPv4 CIDR such as 192.0.2.0/24.",
+    watchlist: "Indicator Watchlist", watchlistEyebrow: "INDICATOR REGISTRY / 03", watchlistTitle: "Indicator Watchlist",
+    watchlistIntro: "Save IPs, domains, URLs, email addresses and hashes with their type, a note, and an optional case. Duplicates are detected locally.",
+    indicatorValue: "Indicator", indicatorValueHint: "IP, domain, URL, email address or hash", indicatorNote: "Note", indicatorNoteHint: "Optional context",
+    indicatorCase: "Attach to case (optional)", noCase: "No case", indicatorSavedNote: "Saved locally with automatic type classification. No network request is made.",
+    addIndicator: "Add indicator +", watchlistRegistry: "REGISTRY", savedIndicators: "Saved indicators", allTypes: "All types",
+    indicatorExportCsv: "Export CSV ↓", loadingIndicators: "Loading indicators…", indicatorEmpty: "No indicators saved yet. Add your first indicator above.",
+    indicatorAdded: "Indicator saved.", indicatorDuplicate: "This indicator is already on the watchlist for this case.", indicatorAddFailed: "Could not save indicator: {error}",
+    indicatorDeleted: "Indicator removed.", indicatorDeleteFailed: "Could not remove indicator: {error}", indicatorLoadFailed: "Could not load indicators: {error}",
+    deleteIndicator: "Remove", indicatorNoCaseLabel: "No case attached", indicatorSummaryTotal: "TOTAL INDICATORS", indicatorSummaryTypes: "{count} types recorded",
+    indicatorAttached: "Case: {case}", typeIp: "IP", typeDomain: "Domain", typeUrl: "URL", typeEmail: "Email", typeHash: "Hash", typeUnknown: "Unknown",
     socialCategory: "Social", developerCategory: "Developer", creatorCategory: "Creator", professionalCategory: "Professional", manualSearch: "Manual search required"
   },
   tr: {
@@ -163,7 +173,7 @@ const translations = {
     casesEyebrow: "ARAŞTIRMA ÇALIŞMA ALANI / 02", caseIntro: "Araştırmanın kapsamını, yetkilendirmesini ve notlarını açıkça kaydedin.",
     caseTitle: "Dosya başlığı", notes: "Notlar", notesOptional: "İsteğe bağlı, en fazla 5000 karakter", savedSQLite: "Bu oturumun SQLite veritabanına kaydedilir.",
     createCase: "Dosya oluştur +", yourWork: "ÇALIŞMALARINIZ", savedInvestigations: "Kaydedilen araştırmalar", refresh: "Yenile", loadingCases: "Dosyalar yükleniyor…",
-    footerResponsible: "OMNITRACE / SORUMLU ARAŞTIRMA İÇİN TASARLANDI", footerPublicSources: "Yalnızca açık kaynaklar · v0.5.1",
+    footerResponsible: "OMNITRACE / SORUMLU ARAŞTIRMA İÇİN TASARLANDI", footerPublicSources: "Yalnızca açık kaynaklar · v0.6.0",
     usernamePlaceholder: "ornek_kullanici", caseTitlePlaceholder: "örn. Yetkili laboratuvar çalışması", notesPlaceholder: "Kapsam, amaç, kaynak notları…",
     apiOnline: "API çevrimiçi", apiUnavailable: "API kullanılamıyor", platformLoadError: "Platform listesi yüklenemedi: {error}",
     selectPlatform: "En az bir platform seçin.", preparing: "Hazırlanıyor…", resultCount: "{count} aday",
@@ -187,6 +197,16 @@ const translations = {
     analystLab: "Analist Laboratuvarı", settings: "Ayarlar", labEyebrow: "ANALİST LABORATUVARI / 03", labTitle: "Analist Laboratuvarı", labIntro: "Kanıt hazırlama, gösterge çıkarımı ve tekrarlanabilir analiz için tarayıcıda çalışan on araç. Bir araç özellikle belirtmedikçe işlem tarayıcınızda kalır.",
     iocExtractTitle: "01 / IOC Çıkarıcı", iocExtractDesc: "Metinden olası IP, alan adı, URL, e-posta ve hash değerlerini çıkarır.", extractIndicators: "Göstergeleri çıkar", defangTitle: "02 / Defang ve Refang", defangDesc: "Göstergeleri paylaşım için güvenli biçime getirir veya standart yazımına döndürür.", defangOption: "Defang (güvenli yazım)", refangOption: "Refang (normal yazım)", transform: "Dönüştür", base64Title: "03 / Base64 aracı", base64Desc: "UTF-8 desteğiyle metni yerel olarak kodlar veya çözer.", encode: "Kodla", decode: "Çöz", runTool: "Aracı çalıştır", urlCodecTitle: "04 / URL kodlayıcı", urlCodecDesc: "Bir adresi ziyaret etmeden URL bileşenlerini kodlar veya çözer.", shaTitle: "05 / SHA-256 metin özeti", shaDesc: "Metnin SHA-256 özetini tarayıcıda hesaplar. Dosya hash'i hesaplamaz.", calculateHash: "SHA-256 hesapla", timestampTitle: "06 / Zaman damgası dönüştürücü", timestampDesc: "Unix saniye veya milisaniyesini okunabilir UTC tarihine çevirir.", convertTime: "Zamanı dönüştür", cidrTitle: "07 / IPv4 CIDR hesaplayıcı", cidrDesc: "Ağ adresi, yayın adresi ve kullanılabilir ana makine sayısını hesaplar.", calculateNetwork: "Ağı hesapla", sourceScoreTitle: "08 / Kaynak değerlendirme", sourceScoreDesc: "Kaynak kalitesi için şeffaf kontrol listesi; doğruluk dedektörü değildir.", sourcePrimary: "Birincil kaynak veya özgün kayıt", sourceCorroborated: "Bağımsız kaynakla doğrulanmış", sourceRecent: "Tarih ve bağlam açık", sourceMethod: "Toplama yöntemi belgelenmiş", sourceBias: "Olası yanlılık ve sınırlamalar not edilmiş", assessSource: "Kaynağı değerlendir", relationshipTitle: "09 / İlişki haritalayıcı", relationshipDesc: "Basit araştırma ilişkilerini okunabilir ve dışa aktarılabilir biçimde kaydeder.", addRelationship: "İlişki ekle", reportTitle: "10 / Hızlı rapor oluşturucu", reportDesc: "Zaman damgalı araştırma notu oluşturur ve metin raporu olarak dışa aktarır.", buildReport: "Raporu oluştur", downloadReport: "Raporu indir", labNotice: "Bu yardımcılar tarayıcıda yerel çalışır. Çıkarılan göstergeler ve ilişki notları doğrulanmış gerçekler değil, araştırma ipuçlarıdır. Parola, özel kayıt veya hassas kişisel veri yapıştırmayın.", settingsEyebrow: "ÇALIŞMA ALANI / TERCİHLER", settingsTitle: "Çalışma alanı ayarları", settingsIntro: "Bu tarayıcı için vurgu rengini, yoğunluğu ve animasyon tercihlerini kişiselleştirin.", appearanceTitle: "Görünüm", accentColor: "Vurgu rengi", compactMode: "Kompakt düzen", disableMotion: "Ek animasyonları kapat", saveSettings: "Tercihleri kaydet", settingsLocal: "Tercihler yalnızca bu tarayıcıda saklanır.",
     sourceAssessmentResult: "Kaynak değerlendirmesi: {score}/5 kontrol tamamlandı. Bu bir süreç kontrol listesidir, güvenilirlik hükmü değildir.", indicatorsFound: "{count} benzersiz gösterge çıkarıldı.", noIndicators: "Olası gösterge bulunamadı.", copied: "Panoya kopyalandı.", relationshipAdded: "İlişki eklendi.", reportBuilt: "Rapor oluşturuldu.", settingsSaved: "Tercihler kaydedildi.", invalidInput: "Girdiyi kontrol edip yeniden deneyin.", networkInvalid: "192.0.2.0/24 gibi geçerli bir IPv4 CIDR girin.",
+    watchlist: "Gösterge İzleme Listesi", watchlistEyebrow: "GÖSTERGE KAYIT DEFTERİ / 03", watchlistTitle: "Gösterge İzleme Listesi",
+    watchlistIntro: "IP, alan adı, URL, e-posta adresi ve hash değerlerini türü, notu ve isteğe bağlı dosyasıyla kaydedin. Yinelenenler yerel olarak algılanır.",
+    indicatorValue: "Gösterge", indicatorValueHint: "IP, alan adı, URL, e-posta adresi veya hash", indicatorNote: "Not", indicatorNoteHint: "İsteğe bağlı bağlam",
+    indicatorCase: "Dosyaya bağla (isteğe bağlı)", noCase: "Dosya yok", indicatorSavedNote: "Otomatik tür sınıflandırmasıyla yerel olarak kaydedilir. Ağ isteği yapılmaz.",
+    addIndicator: "Gösterge ekle +", watchlistRegistry: "KAYIT DEFTERİ", savedIndicators: "Kaydedilen göstergeler", allTypes: "Tüm türler",
+    indicatorExportCsv: "CSV dışa aktar ↓", loadingIndicators: "Göstergeler yükleniyor…", indicatorEmpty: "Henüz gösterge kaydedilmedi. Yukarıdan ilk göstergenizi ekleyin.",
+    indicatorAdded: "Gösterge kaydedildi.", indicatorDuplicate: "Bu gösterge bu dosya için zaten izleme listesinde.", indicatorAddFailed: "Gösterge kaydedilemedi: {error}",
+    indicatorDeleted: "Gösterge kaldırıldı.", indicatorDeleteFailed: "Gösterge kaldırılamadı: {error}", indicatorLoadFailed: "Göstergeler yüklenemedi: {error}",
+    deleteIndicator: "Kaldır", indicatorNoCaseLabel: "Dosya bağlı değil", indicatorSummaryTotal: "TOPLAM GÖSTERGE", indicatorSummaryTypes: "{count} tür kayıtlı",
+    indicatorAttached: "Dosya: {case}", typeIp: "IP", typeDomain: "Alan adı", typeUrl: "URL", typeEmail: "E-posta", typeHash: "Hash", typeUnknown: "Bilinmeyen",
     socialCategory: "Sosyal", developerCategory: "Geliştirici", creatorCategory: "İçerik üretici", professionalCategory: "Profesyonel", manualSearch: "Elle arama gerekli"
   }
 };
@@ -203,11 +223,15 @@ function applyLanguage() {
   $('#language-toggle').textContent = currentLanguage === 'en' ? 'TR' : 'EN';
   $('#language-toggle').setAttribute('aria-label', currentLanguage === 'en' ? 'Türkçeye geç' : 'Switch to English');
   const activeView = $('.nav-item.active')?.dataset.view || 'overview';
-  const titleKeys = { overview: 'overview', identity: 'identity', intel: 'osintTools', cases: 'investigations', lab: 'analystLab', settings: 'settings' };
+  const titleKeys = { overview: 'overview', identity: 'identity', intel: 'osintTools', cases: 'investigations', watchlist: 'watchlist', lab: 'analystLab', settings: 'settings' };
   $('#page-title').textContent = t(titleKeys[activeView] || 'overview');
   if (providers.length) renderPlatformOptions();
   if ($('#identity-results') && !$('#identity-results').classList.contains('hidden')) {
     $$('.not-checked').forEach(el => el.textContent = t('notChecked'));
+  }
+  if ($('#view-watchlist') && !$('#view-watchlist').classList.contains('hidden')) {
+    renderIndicators();
+    loadIndicatorCases();
   }
 }
 $('#language-toggle').addEventListener('click', () => {
@@ -240,9 +264,10 @@ async function api(path, options = {}) {
 function showView(view) {
   $$('.view').forEach(el => el.classList.toggle('hidden', el.id !== `view-${view}`));
   $$('.nav-item').forEach(el => el.classList.toggle('active', el.dataset.view === view));
-  const titles = { overview: 'overview', identity: 'identity', intel: 'osintTools', cases: 'investigations', lab: 'analystLab', settings: 'settings' };
+  const titles = { overview: 'overview', identity: 'identity', intel: 'osintTools', cases: 'investigations', watchlist: 'watchlist', lab: 'analystLab', settings: 'settings' };
   $('#page-title').textContent = t(titles[view] || 'overview');
   if (view === 'cases') loadCases();
+  if (view === 'watchlist') { loadWatchlist(); loadIndicatorCases(); }
 }
 $$('[data-view]').forEach(button => button.addEventListener('click', () => showView(button.dataset.view)));
 $$('[data-goto]').forEach(button => button.addEventListener('click', () => showView(button.dataset.goto)));
@@ -549,4 +574,138 @@ $('#save-settings')?.addEventListener('click',()=>{
   try{localStorage.setItem('omnitrace-preferences',JSON.stringify(prefs));}catch(_){}
   applyPreferences();toast(t('settingsSaved'));
 });
+// ---------------------------------------------------------------------------
+// Indicator watchlist: case-linked indicators with automatic classification.
+// Everything is stored by the local API; no indicator value is fetched.
+// ---------------------------------------------------------------------------
+let watchlistItems = [];
+
+function indicatorTypeLabel(type) {
+  const keys = { ip: 'typeIp', domain: 'typeDomain', url: 'typeUrl', email: 'typeEmail', hash: 'typeHash' };
+  return t(keys[type] || 'typeUnknown');
+}
+
+function renderIndicatorSummary() {
+  const summary = $('#indicator-summary');
+  if (!summary) return;
+  summary.replaceChildren();
+  const types = new Set(watchlistItems.map(item => item.indicator_type));
+  const cards = [
+    { labelKey: 'indicatorSummaryTotal', value: String(watchlistItems.length) },
+    { label: t('indicatorSummaryTypes', { count: types.size }), value: [...types].map(type => indicatorTypeLabel(type)).join(' · ') || '—' },
+  ];
+  cards.forEach(card => {
+    const box = document.createElement('div');
+    box.className = 'stat-card watchlist-stat';
+    const value = document.createElement('strong');
+    value.textContent = card.value;
+    const label = document.createElement('span');
+    label.textContent = card.label || t(card.labelKey);
+    box.append(value, label);
+    summary.appendChild(box);
+  });
+}
+
+function renderIndicators() {
+  const container = $('#indicator-list');
+  if (!container) return;
+  const filter = $('#indicator-filter')?.value || '';
+  const items = filter ? watchlistItems.filter(item => item.indicator_type === filter) : watchlistItems;
+  renderIndicatorSummary();
+  if (!items.length) {
+    container.innerHTML = `<div class="empty-state">${escapeHtml(t('indicatorEmpty'))}</div>`;
+    return;
+  }
+  container.innerHTML = items.map(item => {
+    const type = indicatorTypeLabel(item.indicator_type);
+    const caseLabel = item.case_title
+      ? escapeHtml(t('indicatorAttached', { case: item.case_title }))
+      : escapeHtml(t('indicatorNoCaseLabel'));
+    return `
+      <article class="case-card indicator-card">
+        <div class="indicator-head">
+          <h4>${escapeHtml(item.value)}</h4>
+          <span class="indicator-badge type-${escapeHtml(item.indicator_type)}">${escapeHtml(type)}</span>
+        </div>
+        <time>${escapeHtml(new Date(item.created_at).toLocaleString(currentLanguage === 'tr' ? 'tr-TR' : 'en-US'))}</time>
+        ${item.note ? `<p>${escapeHtml(item.note)}</p>` : ''}
+        <p class="muted">${caseLabel}</p>
+        <button type="button" class="text-button indicator-delete" data-id="${escapeHtml(item.id)}">${escapeHtml(t('deleteIndicator'))} ✕</button>
+      </article>`;
+  }).join('');
+  $$('.indicator-delete').forEach(button => button.addEventListener('click', () => deleteIndicator(button.dataset.id)));
+}
+
+async function loadWatchlist() {
+  const container = $('#indicator-list');
+  if (container) container.innerHTML = `<div class="empty-state">${escapeHtml(t('loadingIndicators'))}</div>`;
+  try {
+    const data = await api('/api/indicators?limit=500');
+    watchlistItems = data.indicators || [];
+    renderIndicators();
+  } catch (error) {
+    if (container) container.innerHTML = `<div class="empty-state">${escapeHtml(t('indicatorLoadFailed', { error: error.message }))}</div>`;
+  }
+}
+
+async function loadIndicatorCases() {
+  const select = $('#indicator-case');
+  if (!select) return;
+  const current = select.value;
+  try {
+    const data = await api('/api/cases');
+    const options = [new Option(t('noCase'), '')];
+    (data.cases || []).forEach(item => options.push(new Option(item.title, String(item.id))));
+    select.replaceChildren(...options);
+    select.value = current;
+  } catch (_) {
+    // The case list is optional context; the watchlist still works without it.
+  }
+}
+
+async function deleteIndicator(id) {
+  try {
+    await api(`/api/indicators/${id}`, { method: 'DELETE' });
+    toast(t('indicatorDeleted'));
+    await loadWatchlist();
+  } catch (error) {
+    toast(t('indicatorDeleteFailed', { error: error.message }));
+  }
+}
+
+$('#indicator-form')?.addEventListener('submit', async event => {
+  event.preventDefault();
+  const value = $('#indicator-value').value.trim();
+  const note = $('#indicator-note').value.trim();
+  const caseValue = $('#indicator-case').value;
+  if (!value) { toast(t('invalidInput')); return; }
+  try {
+    const result = await api('/api/indicators', {
+      method: 'POST',
+      body: JSON.stringify({ value, note, case_id: caseValue ? Number(caseValue) : null }),
+    });
+    toast(t(result.duplicate ? 'indicatorDuplicate' : 'indicatorAdded'));
+    $('#indicator-value').value = '';
+    $('#indicator-note').value = '';
+    await loadWatchlist();
+  } catch (error) {
+    toast(t('indicatorAddFailed', { error: error.message }));
+  }
+});
+
+$('#indicator-filter')?.addEventListener('change', renderIndicators);
+$('#refresh-indicators')?.addEventListener('click', loadWatchlist);
+$('#indicator-export-json')?.addEventListener('click', () => {
+  downloadFile('omnitrace-indicators.json', JSON.stringify({
+    product: 'OMNITRACE', exported_at: new Date().toISOString(), count: watchlistItems.length, indicators: watchlistItems,
+  }, null, 2), 'application/json;charset=utf-8');
+});
+$('#indicator-export-csv')?.addEventListener('click', () => {
+  if (!watchlistItems.length) { toast(t('invalidInput')); return; }
+  const rows = [['value', 'type', 'note', 'case_id', 'case_title', 'created_at'],
+    ...watchlistItems.map(item => [item.value, item.indicator_type, item.note, item.case_id ?? '', item.case_title ?? '', item.created_at])];
+  const csv = '\ufeff' + rows.map(row => row.map(csvCell).join(',')).join('\r\n');
+  downloadFile('omnitrace-indicators.csv', csv, 'text/csv;charset=utf-8');
+});
+
 setupAnalystLab(); applyPreferences();
